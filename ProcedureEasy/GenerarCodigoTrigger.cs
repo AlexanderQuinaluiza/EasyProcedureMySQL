@@ -10,7 +10,7 @@ namespace ProcedureEasy
 /// Clase o Objeto que genera un trigger parametrizado para evitar la inserción de datos 
 /// sucios.
 /// </summary>
-   public class GenerarCodigoTrigger
+    class GenerarCodigoTrigger :Operaciones
     {
         /// <summary>
      /// Constructor que inicializa la conexión y el nombre de la tabla que son necesarias para la 
@@ -26,5 +26,11 @@ namespace ProcedureEasy
 
         }
 
-    }
+    }/// <summary>
+    /// Ejecuc
+    /// </summary>
+    public enum Trigger {
+        Before,
+        After
+    };
 }
