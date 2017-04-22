@@ -82,9 +82,11 @@ namespace ProcedureEasy
         /// <summary>
         /// Metodo que ejecuta el codigo generado  y lo ingresa en la base de datos MySQL.
         /// </summary>
-        /// <param name="codigos"> array con el codigo listo para ejecutarse.</param>
-        /// <returns> int, número de filas ingresadas a la base de datos.</returns>
-        protected int insertarProcedimientos(string codigos)
+        /// <param name="codigos"> string con el codigo listo para ejecutarse.</param>
+        /// <returns> int, número de filas ingresadas a la base de datos.
+        /// En el caso de creación de procedimientos almacenados y triggers el metodo retorna el numero cero(0)
+        /// si la execución fue la correcta.</returns>
+        protected int insertarCodigo(string codigos)
         {
             int resultado = 0;
             Conexion conectar = new Conexion();
@@ -99,11 +101,13 @@ namespace ProcedureEasy
             }
             catch (Exception e)
             {
-
                 new Exception(e.Message);
             }
             return resultado;
         }
+
+        
+
         #endregion
     }
 }
