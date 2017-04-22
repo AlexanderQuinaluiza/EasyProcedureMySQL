@@ -266,7 +266,7 @@ namespace ProcedureEasy
         /// </summary>
         /// <returns>string, codigo del procedimineto de busqueda.
         /// <example> create procedure SpFind_[nombre_Tabla] ([proc_parameter_primary_key[,...]])
-        /// [Setencia select ...] </example>
+        /// [Setencia select ...] </example></returns>
         public string CodigoFindProcedure()
         {
             int resultado = 0;
@@ -315,7 +315,7 @@ namespace ProcedureEasy
             //creación del procedimiento en la base de dcatos
             if (existeProcedimiento(nombreProcedimiento) == 0)
             {
-                resultado = insertarProcedimientos(codigo);
+                resultado = insertarCodigo(codigo);
             }
 
 
