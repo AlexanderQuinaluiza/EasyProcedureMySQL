@@ -8,14 +8,16 @@ using MySql.Data.MySqlClient;
 namespace ProcedureEasy
 {
     class Conexion
-    {
+    { // variables estaticas que el usuario de la API debe enviar.
        static private MySqlConnection _Connection;
        static private string _nombreTabla;
-
-      
+           
 
         #region propiedades
-
+        /// <summary>
+        /// * set o get el nombre de la tabla de cual cual se quiere realizar los procedimientos
+        /// <example> tabla clientes</example>
+        /// </summary>
         public string NombreTabla
         {
             get
@@ -28,6 +30,10 @@ namespace ProcedureEasy
                 _nombreTabla = value;
             }
         }
+        /// <summary>
+        /// * set o get la conexión establecida por el usuario de la API.
+        /// <example> MySqlConnection conection</example>
+        /// </summary>
         public MySqlConnection Connection
         {
             get
@@ -40,9 +46,6 @@ namespace ProcedureEasy
                 _Connection =value;
             }
         }
-
-
-
         #endregion
     }
 }

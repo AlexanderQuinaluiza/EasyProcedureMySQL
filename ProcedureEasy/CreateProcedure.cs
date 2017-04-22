@@ -35,7 +35,7 @@ namespace ProcedureEasy
         /// <returns>Int, número de filas insertadas. </returns>
         public string createProcedimiento(Tipo tipoProcedimiento)
         {
-            GenerarCodigo gc = new GenerarCodigo();
+            GenerarCodigoProcedure gc = new GenerarCodigoProcedure();
             int num = (int)tipoProcedimiento;
             string resultado = null;
             switch (num)

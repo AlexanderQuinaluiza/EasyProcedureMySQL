@@ -9,7 +9,7 @@ namespace ProcedureEasy
 {/// <summary>
 /// Esta clase genera el codigo del procedimiento almacenado despues del mapeo de datos.
 /// </summary>
-   class GenerarCodigo : Operaciones
+   class GenerarCodigoProcedure : Operaciones
     {
        #region Metodos de generación de codigo [insert,update,delete,select,find]
 
