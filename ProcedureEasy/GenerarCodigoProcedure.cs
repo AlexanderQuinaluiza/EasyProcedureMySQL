@@ -81,9 +81,7 @@ namespace ProcedureEasy
             {
                 resultado = insertarCodigo(codigo);
             }
-
-
-            return codigo;
+             return codigo;
         }
 
         /// <summary>
