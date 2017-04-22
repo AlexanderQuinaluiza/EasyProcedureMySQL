@@ -12,19 +12,7 @@ namespace ProcedureEasy
 /// </summary>
     class GenerarCodigoTrigger :Operaciones
     {
-        /// <summary>
-     /// Constructor que inicializa la conexión y el nombre de la tabla que son necesarias para la 
-     /// creación de un trigger para validación
-     /// </summary>
-     /// <param name="conexion"> MySqlConnection conexion</param>
-     /// <param name="tabla"> string, nombre de la tabla en particular <example> "clientes"</example></param>
-        public GenerarCodigoTrigger(MySqlConnection conexion , string tabla )
-        {
-            Conexion conectar = new Conexion();
-            conectar.Connection = conexion;
-            conectar.NombreTabla = tabla;
-
-        }
+     
 
     }/// <summary>
     /// Ejecuc
