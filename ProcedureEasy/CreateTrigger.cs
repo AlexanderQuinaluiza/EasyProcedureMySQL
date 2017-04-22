@@ -24,7 +24,21 @@ namespace ProcedureEasy
             conectar.Connection = conexion;
             conectar.NombreTabla = tabla;
         }
-        
-        
+
+        /// <summary>
+        /// Numeración, tiempo de ejecucción del trigger
+        /// </summary>
+        public enum Trigger
+        {/// <summary>
+        /// Se ejecuta antes (before) de la acción determinada por el metodo al que establece el parametro.
+        /// </summary>
+            Before,
+            /// <summary>
+            /// Se ejecuta despues (despues) de la acción determinada por el metodo al que establece el parametro.
+            /// </summary>
+            After
+        };
     }
+   
+
 }
