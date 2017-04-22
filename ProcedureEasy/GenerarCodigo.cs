@@ -143,7 +143,7 @@ namespace ProcedureEasy
             //creación del procedimiento en la base de dcatos
             if (existeProcedimiento(nombreProcedimiento)==0)
             {
-                resultado = insertarProcedimientos(codigo);
+                resultado = insertarCodigo(codigo);
             }
                
            
