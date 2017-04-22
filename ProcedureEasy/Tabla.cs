@@ -5,8 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProcedureEasy
-{
-    public class Tabla
+{/// <summary>
+/// Clase que contiene las propiedades de los campos necesarios para la manipulacion y construcción 
+/// de procedimientos alamcenados automaticamente.
+/// </summary>
+    class Tabla
     {
         private string _field;
         private string _type;
