@@ -149,7 +149,6 @@ namespace ProcedureEasy
            
             return codigo;
         }
-
         /// <summary>
         /// Metodo que retorna el codigo de un procedimiento para el borrado de datos.
         /// </summary>
@@ -209,7 +208,6 @@ namespace ProcedureEasy
 
             return codigo;
         }
-
         /// <summary>
         /// Metodo que retorna el codigo de un procedimiento para la consulta de datos.
         /// </summary>
@@ -262,7 +260,6 @@ namespace ProcedureEasy
 
             return codigo;
         }
-
         /// <summary>
         /// Metodo que retorna el codigo de un procedimiento para la busqueda de un registro especifico
         /// de la base de datos.
@@ -320,6 +317,8 @@ namespace ProcedureEasy
             {
                 resultado = insertarProcedimientos(codigo);
             }
+
+
             return codigo;
         }
         #endregion

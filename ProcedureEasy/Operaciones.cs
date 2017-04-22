@@ -22,27 +22,23 @@ namespace ProcedureEasy
         protected List<Tabla> estructuraTabla()
         {
             List<Tabla> estructura = new List<Tabla>();
-            //Instancia de la clase conectar 
             Conexion conectar = new Conexion();
             try
-            {   //sql que consulta la estructura de una tabla en MySQL.
+            {
                 string sql = " describe " + conectar.NombreTabla;
+
                 conectar.Connection.Open();
                 MySqlCommand cmd = new MySqlCommand(sql, conectar.Connection);
                 MySqlDataReader red = cmd.ExecuteReader();
                 while (red.Read())
                 {
-                    //Instancia de la clase tabla
                     Tabla tab = new Tabla();
-                    //carga las propiedades de la clase tabla con los campos de la estructura 
-                    //que retorna la consulta en el reader.
                     tab.Field = red[0].ToString();
                     tab.Type = red[1].ToString();
                     tab.Null = red[2].ToString();
                     tab.Key = red[3].ToString();
                     tab.Default = red[4].ToString();
                     tab.Extra = red[5].ToString();
-                    // agrega la a la lista estructura un item tipo Tabla.
                     estructura.Add(tab);
                 }
                 conectar.Connection.Close();
