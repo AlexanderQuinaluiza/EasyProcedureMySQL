@@ -18,6 +18,10 @@ namespace ProcedureEasy
         private string _default;
         private string _extra;
         #region propiedades de la tabla
+        /// <summary>
+        /// * set o get el nombre del campo de la tabla.
+        /// Ejemplo: <example>id,nombre,apellido ...</example>
+        /// </summary>
         public string Field
         {
             get
@@ -30,7 +34,10 @@ namespace ProcedureEasy
                 _field = value;
             }
         }
-
+        /// <summary>
+        /// * set o get el tipo de dato y su longitud.
+        /// Ejemplo: <example> varchar(100)</example>
+        /// </summary>
         public string Type
         {
             get
@@ -43,7 +50,10 @@ namespace ProcedureEasy
                 _type = value;
             }
         }
-
+        /// <summary>
+        /// * set o get si el campo de la tabla acepta valores NULL.
+        /// Ejemplo: <example> NO o SI</example>
+        /// </summary>
         public string Null
         {
             get
@@ -56,7 +66,10 @@ namespace ProcedureEasy
                 _null = value;
             }
         }
-
+        /// <summary>
+        /// * set o get si el campo de la tabla es clave primary, unica, indice, clave forenea o mas
+        /// Ejemplo: <example> PRI,MUL...</example>
+        /// </summary>
         public string Key
         {
             get
