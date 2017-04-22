@@ -14,11 +14,5 @@ namespace ProcedureEasy
     {
      
 
-    }/// <summary>
-    /// Ejecuc
-    /// </summary>
-    public enum Trigger {
-        Before,
-        After
-    };
+    }
 }
