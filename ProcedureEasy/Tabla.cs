@@ -82,7 +82,10 @@ namespace ProcedureEasy
                 _key = value;
             }
         }
-
+        /// <summary>
+        /// * set o get si el  campo de la tabla tiene valores o expresiones por defecto.
+        /// Ejemplo: <example> 0,'administrador'...</example>
+        /// </summary>
         public string Default
         {
             get
@@ -95,7 +98,10 @@ namespace ProcedureEasy
                 _default = value;
             }
         }
-
+        /// <summary>
+        /// * set o get si el campo posee opciones extras.
+        /// Ejemplo: <example> Current_timestamp, auto_increment...</example>
+        /// </summary>
         public string Extra
         {
             get
