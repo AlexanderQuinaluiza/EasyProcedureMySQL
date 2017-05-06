@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="Conexion.cs" />
     <Compile Include="CreateProcedure.cs" />
-    <Compile Include="CreateTrigger.cs" />
     <Compile Include="GenerarCodigoProcedure.cs" />
     <Compile Include="GenerarCodigoTrigger.cs" />
     <Compile Include="Operaciones.cs" />

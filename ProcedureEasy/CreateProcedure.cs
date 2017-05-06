@@ -11,8 +11,16 @@ namespace ProcedureEasy
     /// automaticos para MySQL.
     /// </summary>
   public class CreateProcedure
-    {
-       
+    {/// <summary>
+     /// Constructor que establece la conexión con la base da datos para poder tarbajar con los siguientes tablas 
+     /// </summary>
+     /// <param name="conexion">MySqlConnection conexion</param>
+        public CreateProcedure(MySqlConnection conexion)
+        {
+
+            Conexion conectar = new Conexion();
+            conectar.Connection = conexion;
+        }
         /// <summary>
         /// Constructor con parametros que inicializa la conexión y el nombre de la tabla.
         /// </summary>
@@ -61,6 +69,20 @@ namespace ProcedureEasy
                     break;
             }
             return resultado;
+        }
+        /// <summary>
+        /// Metodo que retorna una lista con los nombres de los esquemas existentes en la base de datos. 
+        /// </summary>
+        /// <param name="conexion"></param>
+        /// <returns>List</returns>
+        public List<string> listaSchemas(MySqlConnection conexion)
+        {
+            Conexion conectar = new Conexion();
+            conectar.Connection = conexion;
+            List<string> bases = new List<string>();
+            Operaciones op = new Operaciones();
+            bases = op.listaBases();
+            return bases;
         }
         
       
