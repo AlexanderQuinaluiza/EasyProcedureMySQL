@@ -75,10 +75,9 @@ namespace ProcedureEasy
         /// </summary>
         /// <param name="conexion"></param>
         /// <returns>List</returns>
-        public List<string> listaSchemas(MySqlConnection conexion)
+        public List<string> listaSchemas()
         {
-            Conexion conectar = new Conexion();
-            conectar.Connection = conexion;
+            
             List<string> bases = new List<string>();
             Operaciones op = new Operaciones();
             bases = op.listaBases();
