@@ -158,7 +158,7 @@ namespace ProcedureEasy
             Conexion conectar = new Conexion();
             try
             {
-                string sql = " select TABLE_NAME Tabla from information_schema.TABLES "
+                string sql = " select TABLE_NAME as Tabla from information_schema.TABLES "
                 + " WHERE TABLE_SCHEMA = database()  "
                 + " AND TABLE_TYPE='BASE TABLE'; ";
                 MySqlCommand cmd = new MySqlCommand(sql, conectar.Connection);
@@ -184,6 +184,42 @@ namespace ProcedureEasy
             return ltables;
 
 
+        }
+        /// <summary>
+        /// Metodo que retorna una lista de clase tabla, con las propiedades necesarias
+        /// </summary>
+        /// <param name="nombreTabla"> string con el nombre de la tabla</param>
+        /// <returns>List de clase Tabla</returns>
+        public List<Tabla> estructuraTabla(string nombreTabla)
+        {
+            List<Tabla> estructura = new List<Tabla>();
+            Conexion conectar = new Conexion();
+            try
+            {
+                string sql = " describe " + nombreTabla;
+
+                conectar.Connection.Open();
+                MySqlCommand cmd = new MySqlCommand(sql, conectar.Connection);
+                MySqlDataReader red = cmd.ExecuteReader();
+                while (red.Read())
+                {
+                    Tabla tab = new Tabla();
+                    tab.Field = red[0].ToString();
+                    tab.Type = red[1].ToString();
+                    tab.Null = red[2].ToString();
+                    tab.Key = red[3].ToString();
+                    tab.Default = red[4].ToString();
+                    tab.Extra = red[5].ToString();
+                    estructura.Add(tab);
+                }
+                conectar.Connection.Close();
+                red.Close();
+            }
+            catch (Exception e)
+            {
+                new Exception(e.Message);
+            }
+            return estructura;
         }
       
     }
