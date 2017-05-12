@@ -9,7 +9,7 @@ namespace ProcedureEasy
 /// Clase que contiene las propiedades de los campos necesarios para la manipulacion y construcción 
 /// de procedimientos alamcenados automaticamente.
 /// </summary>
-    class Tabla
+    class Tabla:BaseDatos
     {
         private string _field;
         private string _type;
