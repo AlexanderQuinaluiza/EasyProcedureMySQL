@@ -49,7 +49,6 @@
     <Compile Include="Conexion.cs" />
     <Compile Include="CreateProcedure.cs" />
     <Compile Include="GenerarCodigoProcedure.cs" />
-    <Compile Include="GenerarCodigoTrigger.cs" />
     <Compile Include="Operaciones.cs" />
     <Compile Include="Procedimientos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

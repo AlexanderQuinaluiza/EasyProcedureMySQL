@@ -105,42 +105,9 @@ namespace ProcedureEasy
             }
             return resultado;
         }
-        /// <summary>
-        /// metodo que retorna una lista con los esquemas usables de mysql.
-        /// </summary>
-       /// <returns>List (string)</returns>
-        public List<string> listaBases()
-        {
-            List<string>Bases = new List<string>();
+        
 
-            Conexion conectar = new Conexion();
-            try
-            {
-                string sql= "select s.schema_name 'Bases de Datos' from information_schema.SCHEMATA as s "
-                +" WHERE s.schema_name NOT IN('information_schema', 'mysql', 'performance_schema', 'sys') "
-                +" ORDER BY schema_name; ";
-                MySqlCommand cmd = new MySqlCommand(sql,conectar.Connection);
-                conectar.Connection.Open();
-                MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-
-                        Bases.Add(reader[0].ToString());
-                    }
-
-                }
-                reader.Close();
-                conectar.Connection.Open();
-            }
-            catch (Exception e)
-            {
-             new Exception(e.Message);
-            }
-            return Bases;
-        }
-
+       
         #endregion
     }
 }

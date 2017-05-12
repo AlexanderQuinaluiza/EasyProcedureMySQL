@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProcedureEasy
 {
-    class BaseDatos
+    public class BaseDatos
     {
         private string _nameBase;
 

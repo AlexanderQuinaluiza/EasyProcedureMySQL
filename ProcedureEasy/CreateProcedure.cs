@@ -77,14 +77,76 @@ namespace ProcedureEasy
         /// <returns>List</returns>
         public List<string> listaSchemas()
         {
-            
-            List<string> bases = new List<string>();
-            Operaciones op = new Operaciones();
-            bases = op.listaBases();
-            return bases;
+
+            List<string> Bases = new List<string>();
+
+            Conexion conectar = new Conexion();
+            try
+            {
+                string sql = "select s.schema_name 'Bases de Datos' from information_schema.SCHEMATA as s "
+                + " WHERE s.schema_name NOT IN('information_schema', 'mysql', 'performance_schema', 'sys') "
+                + " ORDER BY schema_name; ";
+                MySqlCommand cmd = new MySqlCommand(sql, conectar.Connection);
+                conectar.Connection.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+
+                        Bases.Add(reader[0].ToString());
+                    }
+
+                }
+                reader.Close();
+                conectar.Connection.Open();
+            }
+            catch (Exception e)
+            {
+                new Exception(e.Message);
+            }
+            return Bases;
         }
-        
-      
+        /// <summary>
+        /// Metodo que rotorna una lista de tipo clase Procedimientos con los valores como el nombre,el codigo 
+        /// y el nombre de la base propietario de la rutina
+        /// </summary>
+        /// <returns>List </returns>
+        public List<Procedimientos> listaProcedures()
+        {
+            List<Procedimientos> lsp = new List<Procedimientos>();
+            Conexion conectar = new Conexion();
+            try
+            {
+                string sql = "SELECT SPECIFIC_NAME,ROUTINE_DEFINITION,ROUTINE_SCHEMA FROM information_schema.ROUTINES "
+                + " WHERE ROUTINE_SCHEMA= database()  "
+                + " AND ROUTINE_TYPE='PROCEDURE'; ";
+                MySqlCommand cmd = new MySqlCommand(sql, conectar.Connection);
+                conectar.Connection.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Procedimientos sp = new Procedimientos();
+                        sp.NameProcedure = reader[0].ToString();
+                        sp.Definition = reader[1].ToString();
+                        sp.NameBase = reader[2].ToString();
+                        lsp.Add(sp);
+                    }
+
+                }
+                reader.Close();
+                conectar.Connection.Open();
+
+            }
+            catch (Exception ex)
+            {
+
+                new Exception(ex.Message);
+            }
+            return lsp;
+        }
       
     }
 

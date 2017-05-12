@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProcedureEasy
-{
-    class Procedimientos:BaseDatos
+{/// <summary>
+/// clase que contiene las propiedades necesarias de un procedimiento almacenado en MySQL
+/// </summary>
+   public  class Procedimientos:BaseDatos
     {
         private string _nameProcedure;
         private string _definition;
