@@ -137,7 +137,7 @@ namespace ProcedureEasy
 
                 }
                 reader.Close();
-                conectar.Connection.Open();
+                conectar.Connection.Close();
 
             }
             catch (Exception ex)
@@ -146,6 +146,44 @@ namespace ProcedureEasy
                 new Exception(ex.Message);
             }
             return lsp;
+        }
+        /// <summary>
+        /// Metodo que retorna una lista de tablas pertenecientes a un esquema o base de datos
+        /// </summary>
+        /// <returns>List</returns>
+        public List<string> listaTablas()
+        {
+            
+            List<string> ltables = new List<string>();
+            Conexion conectar = new Conexion();
+            try
+            {
+                string sql = " select TABLE_NAME Tabla from information_schema.TABLES "
+                + " WHERE TABLE_SCHEMA = database()  "
+                + " AND TABLE_TYPE='BASE TABLE'; ";
+                MySqlCommand cmd = new MySqlCommand(sql, conectar.Connection);
+                conectar.Connection.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                         ltables.Add(reader[0].ToString());
+                    }
+
+                }
+                reader.Close();
+                conectar.Connection.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+                new Exception(ex.Message);
+            }
+            return ltables;
+
+
         }
       
     }
