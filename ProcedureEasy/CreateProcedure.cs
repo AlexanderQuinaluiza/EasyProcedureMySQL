@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.Web.Script.Serialization;
+using System.IO;
+
 namespace ProcedureEasy
 {
     /// <summary>
@@ -11,7 +14,16 @@ namespace ProcedureEasy
     /// automaticos para MySQL.
     /// </summary>
   public class CreateProcedure
-    {/// <summary>
+    {
+        #region Constructores
+        /// <summary>
+        /// Constructor de la clase, sin parametros 
+        /// </summary>
+        public CreateProcedure()
+        {
+
+        }
+        /// <summary>
      /// Constructor que establece la conexión con la base da datos para poder tarbajar con los siguientes tablas 
      /// </summary>
      /// <param name="conexion">MySqlConnection conexion</param>
@@ -33,7 +45,7 @@ namespace ProcedureEasy
             conectar.NombreTabla=nombreTabla;
             
         }
-
+        #endregion
 
         /// <summary>
         /// Metodo que genera y inserta en la base de datos el procedimiento almacenado dependiendo
@@ -221,11 +233,24 @@ namespace ProcedureEasy
             }
             return estructura;
         }
-      
+
+        /// <summary>
+        /// Metodo para cargar todas las funciones que soporta Mysql
+        /// </summary>
+        /// <returns>List de clase Funciones</returns>
+        public List<Funciones> cargarFunciones()
+        {
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            string outputJSON = File.ReadAllText("Funciones.json");
+            List<Funciones> fun = (List<Funciones>)ser.Deserialize(outputJSON, typeof(List<Funciones>));
+            return fun;
+        }
+
+
     }
 
 
- 
+
     /// <summary>
     /// Tipo de procedimiento a generar. 
     ///<example> procedimieto.Tipo.Insert</example>
