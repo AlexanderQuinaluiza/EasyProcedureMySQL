@@ -54,6 +54,7 @@
     <Compile Include="Operaciones\Operaciones.cs" />
     <Compile Include="Propiedades\Procedimientos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Propiedades\Relaciones.cs" />
     <Compile Include="Propiedades\Tabla.cs" />
   </ItemGroup>
   <ItemGroup>

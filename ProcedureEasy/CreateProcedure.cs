@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Web.Script.Serialization;
 using System.IO;
+using ProcedureEasy.Propiedades;
 
 namespace ProcedureEasy
 {
@@ -241,11 +242,67 @@ namespace ProcedureEasy
         public List<Funciones> cargarFunciones()
         {
             JavaScriptSerializer ser = new JavaScriptSerializer();
-            string outputJSON = File.ReadAllText("Funciones.json");
+            string outputJSON = File.ReadAllText(@"C:\Users\Alexander\Documents\Visual Studio 2015\Projects\ProcedureEasy\ProcedureEasy\Funciones.json");
             List<Funciones> fun = (List<Funciones>)ser.Deserialize(outputJSON, typeof(List<Funciones>));
             return fun;
         }
+        /// <summary>
+        /// Metodo que retorna una lista con el nombre, tablas y columnas relacionas entre si.
+        /// </summary>
+        /// <returns>List de tipo "Relaciones" <example> const_name,estudiantes,cedula,materia,cedula_p</example>
+        /// Entonces se identifica la correspondecia de uno a varios en el orden establecido</returns>
+        public List<Relaciones> listaRelaciones()
+        {
+            Conexion conectar = new Conexion();
+            List<Relaciones> list = new List<Relaciones>();
+            try
+            {
+                #region sentencia sql
+                String sql = "SELECT " +
+"k.CONSTRAINT_NAME, " +
+"k.TABLE_NAME, " +
+"COLUMN_NAME, " +
+"REFERENCED_TABLE_NAME, " +
+"REFERENCED_COLUMN_NAME " +
+"FROM information_schema.KEY_COLUMN_USAGE k, information_schema.TABLES j " +
+"WHERE CONSTRAINT_SCHEMA = database() AND " +
+"REFERENCED_TABLE_SCHEMA IS NOT NULL AND " +
+"REFERENCED_TABLE_NAME IS NOT NULL AND " +
+"REFERENCED_COLUMN_NAME IS NOT NULL " +
+"group by k.constraint_name " +
+"order by TABLE_NAME; ";
+                #endregion
+                MySqlCommand cmd = new MySqlCommand(sql, conectar.Connection);
+                //abrir la conexion 
+                conectar.Connection.Open();
+                //creacion de un adapter reader
 
+                MySqlDataReader reder = cmd.ExecuteReader();
+                if (reder.HasRows)
+                {   //llenar la lista con las relaciones de las tablas
+                    while (reder.Read())
+                    {
+                        Relaciones relaciones = new Relaciones();
+                        relaciones.Const_name = reder[0].ToString();
+                        relaciones.Table_name = reder[1].ToString();
+                        relaciones.Column_name = reder[2].ToString();
+                        relaciones.Refe_table = reder[3].ToString();
+                        relaciones.Ref_column = reder[4].ToString();
+                        list.Add(relaciones);
+                    }
+
+                }
+                //cerrar la conexion
+                conectar.Connection.Close();
+            }
+            catch (Exception ex)
+            {
+
+                new Exception("Error, metodo ListaRelacion", ex);
+            }
+            return list;
+
+        }
 
     }
 

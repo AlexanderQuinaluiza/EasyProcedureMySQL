@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using ProcedureEasy.Propiedades;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -45,7 +46,7 @@ namespace ProcedureEasy
             }
             catch (Exception e)
             {
-                new Exception(e.Message);
+                new Exception("Error, metodo Estructura Tabla",e);
             }
             return estructura;
         }
@@ -74,7 +75,7 @@ namespace ProcedureEasy
             }
             catch (Exception e)
             {
-                new Exception(e.Message);
+                new Exception("Error, metodo existenciaProcedimiento",e);
             }
             return exists;
         }
@@ -105,6 +106,7 @@ namespace ProcedureEasy
             return resultado;
         }
        
+     
         #endregion
     }
 }
