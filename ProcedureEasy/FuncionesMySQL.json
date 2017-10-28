@@ -49,7 +49,7 @@
   },
   {
     "grupo": "matematicas",
-    "nombre": "CRC32(EXPR)",
+    "nombre": "CRC32(X)",
     "descripcion": "Calcula el valor de comprobación de redundancia cíclica y devuelve un valor entero sin signo de 32 bits",
     "ejemplo": "CRC32('MySQL') retorna 3259397556"
   },
@@ -121,8 +121,8 @@
   },
   {
     "grupo": "matematicas",
-    "nombre": "MOD(N,M)",
-    "descripcion": "Módulo (como el operador % en C). Devuelve el resto de la división de N entre M",
+    "nombre": "MOD(X,Y)",
+    "descripcion": "Módulo (como el operador % en C). Devuelve el resto de la división de X entre Y",
     "ejemplo": " MOD(234, 10) retorna 4"
   },
   {
@@ -211,14 +211,14 @@
   },
   {
     "grupo": "tiempo",
-    "nombre": "ADDTIME(expr,expr2)",
-    "descripcion": "Añade expr2 a expr y devuelve el resultado. expr es una fecha o una expresión de tipo datetime, y expr2 es una expresión de tipo time",
+    "nombre": "ADDTIME(date,expr2)",
+    "descripcion": "Añade expr2 a date y devuelve el resultado. date es una fecha o una expresión de tipo datetime, y expr2 es una expresión de tipo time",
     "ejemplo": "ADDTIME('1997-12-31 23:59:59.999999', '1 1:1:1.000002') retorna 1998-01-02 01:01:01.000001"
   },
   {
     "grupo": "tiempo",
-    "nombre": "CONVERT_TZ(dt,from_tz,to_tz)",
-    "descripcion": "Convierte un valor dt, de fecha y hora, des la zona de tiempos from_tz dada a la zona de tiempos to_tz y devuelve el valor resultante. Las zonas de tiempo pueden ser especificadas como se describe en la sección",
+    "nombre": "CONVERT_TZ(date,from_tz,to_tz)",
+    "descripcion": "Convierte un valor date, de fecha y hora, des la zona de tiempos from_tz dada a la zona de tiempos to_tz y devuelve el valor resultante. Las zonas de tiempo pueden ser especificadas como se describe en la sección",
     "ejemplo": "CONVERT_TZ('2004-01-01 12:00:00','GMT','MET') retorna 2004-01-01 13:00:00"
   },
   {
@@ -247,14 +247,14 @@
   },
   {
     "grupo": "tiempo",
-    "nombre": "DATE(expr)",
-    "descripcion": "Extrae la parte de la fecha de una expresión expre de tipo date o datetime",
+    "nombre": "DATE(date)",
+    "descripcion": "Extrae la parte de la fecha de una expresión date de tipo date o datetime",
     "ejemplo": "DATE('2003-12-31 01:02:03') retorna  2003-12-31"
   },
   {
     "grupo": "tiempo",
-    "nombre": "DATEDIFF(expr,expr2)",
-    "descripcion": "Devuelve el número de días entre la fecha de inicio expr y la de final expr2. expr y expr2 son expresiones de tipo date o date-and-time. Sólo las partes correspondientes a la fecha de cada expresión se usan en los cáculos",
+    "nombre": "DATEDIFF(date,expr2)",
+    "descripcion": "Devuelve el número de días entre la fecha de inicio date y la de final expr2. date y expr2 son expresiones de tipo date o date-and-time. Sólo las partes correspondientes a la fecha de cada expresión se usan en los cáculos",
     "ejemplo": "DATEDIFF('1997-12-31 23:59:59','1997-12-30') retorna  1"
   },
   {
@@ -265,8 +265,8 @@
   },
   {
     "grupo": "tiempo",
-    "nombre": "DATE_FORMAT(fecha,formato)",
-    "descripcion": "Formatea el valor de fecha de acuerdo con la cadena de formato. Se pueden usar los siguientes especificadores para la cadena de formato",
+    "nombre": "DATE_FORMAT(date,formato)",
+    "descripcion": "Formatea el valor de 'date' de acuerdo con la cadena de formato. Se pueden usar los siguientes especificadores para la cadena de formato",
     "ejemplo": "DATE_FORMAT('1997-10-04 22:23:00','%D %y %a %d %m %b %j') retorna  4th 97 Sat 04 10 Oct 277"
   },
   {
@@ -337,7 +337,7 @@
   },
   {
     "grupo": "tiempo",
-    "nombre": "MICROSECOND(expr)",
+    "nombre": "MICROSECOND(date)",
     "descripcion": "Devuelve los microsegundos a partir de una expresión tiempo o fecha y tiempo como un número en el ranfo de 0 a 999999",
     "ejemplo": "MICROSECOND('12:00:00.123456') retorna 123456"
   },
@@ -349,14 +349,14 @@
   },
   {
     "grupo": "tiempo",
-    "nombre": "PERIOD_ADD(P,N)",
-    "descripcion": "Añade N meses al periodo P (en el formato YYMM o YYYYMM). Devuelve un valor en el formato YYYYMM. El argumento periodo P no es un valor de fecha",
+    "nombre": "PERIOD_ADD(X,N)",
+    "descripcion": "Añade N meses al periodo X (en el formato YYMM o YYYYMM). Devuelve un valor en el formato YYYYMM. El argumento periodo X no es un valor de fecha",
     "ejemplo": "PERIOD_ADD(9801,2) retorna 199803"
   },
   {
     "grupo": "tiempo",
-    "nombre": "PERIOD_DIFF(P1,P2)",
-    "descripcion": "Devuelve el número de meses entre los periodos P1 y P2. P1 y P2 deben estar en el formato YYMM o YYYYMM. Los argumentos periodo P1 y P2 no son valores de fecha",
+    "nombre": "PERIOD_DIFF(X,P2)",
+    "descripcion": "Devuelve el número de meses entre los periodos X y P2. X y P2 deben estar en el formato YYMM o YYYYMM. Los argumentos periodo X y P2 no son valores de fecha",
     "ejemplo": "PERIOD_DIFF(9802,199703) retorna 11"
   },
   {
@@ -385,44 +385,44 @@
   },
   {
     "grupo": "tiempo",
-    "nombre": "TIME(expr)",
-    "descripcion": "Extrae la parte de la hora de la expresión expr del tipo tiempo o fecha y hora.",
+    "nombre": "TIME(X)",
+    "descripcion": "Extrae la parte de la hora de la expresión X del tipo tiempo o fecha y hora.",
     "ejemplo": "TIME('2003-12-31 01:02:03') retorna '01:02:03'"
   },
   {
     "grupo": "tiempo",
-    "nombre": "TIMEDIFF(expr,expr2)",
-    "descripcion": "Devuelve el tiempo entre la expresión de tiempo de inicio expr y la final expr2. expr y expr2 son expresiones tiempo de fecha y hora, pero ambas deben ser del mismo tipo.",
+    "nombre": "TIMEDIFF(date,expr2)",
+    "descripcion": "Devuelve el tiempo entre la expresión de tiempo de inicio 'date' y la final 'expr2'. 'date' y 'expr2' son expresiones tiempo de fecha y hora, pero ambas deben ser del mismo tipo.",
     "ejemplo": "TIMEDIFF('2000:01:01 00:00:00', '2000:01:01 00:00:00.000001') retorna '-00:00:00.000001'"
   },
   {
     "grupo": "tiempo",
-    "nombre": "TIMEDIFF(expr,expr2)",
-    "descripcion": "Devuelve el tiempo entre la expresión de tiempo de inicio expr y la final expr2. expr y expr2 son expresiones tiempo de fecha y hora, pero ambas deben ser del mismo tipo.",
+    "nombre": "TIMEDIFF(date,expr2)",
+    "descripcion": "Devuelve el tiempo entre la expresión de tiempo de inicio 'date' y la final expr2. 'date' y expr2 son expresiones tiempo de fecha y hora, pero ambas deben ser del mismo tipo.",
     "ejemplo": "TIMEDIFF('2000:01:01 00:00:00', '2000:01:01 00:00:00.000001') retorna '-00:00:00.000001'"
   },
   {
     "grupo": "tiempo",
-    "nombre": "TIMESTAMP(expr)",
-    "descripcion": "Con un argumento, devuelve la expresión expr de fecha o fecha y hora como un valor fecha y tiempo. Comn dos argumentos, suma la expresión de tiempo expr2 a la expresión de decha o fecha y hora expr y devuelve un valor de fecha y tiempo.",
+    "nombre": "TIMESTAMP(date)",
+    "descripcion": "Con un argumento, devuelve la expresión 'date' de fecha o fecha y hora como un valor fecha y tiempo. Con dos argumentos, suma la expresión de tiempo expr2 a la expresión de decha o fecha y hora expr y devuelve un valor de fecha y tiempo.",
     "ejemplo": "TIMESTAMP('2003-12-31') retorna '2003-12-31 00:00:00'"
   },
   {
     "grupo": "tiempo",
-    "nombre": "TIMESTAMP(expr)",
-    "descripcion": "Con un argumento, devuelve la expresión expr de fecha o fecha y hora como un valor fecha y tiempo. Comn dos argumentos, suma la expresión de tiempo expr2 a la expresión de decha o fecha y hora expr y devuelve un valor de fecha y tiempo.",
+    "nombre": "TIMESTAMP(date)",
+    "descripcion": "Con un argumento, devuelve la expresión 'date' de fecha o fecha y hora como un valor fecha y tiempo. Con dos argumentos, suma la expresión de tiempo 'expr2' a la expresión de decha o fecha y hora expr y devuelve un valor de fecha y tiempo.",
     "ejemplo": "TIMESTAMP('2003-12-31') retorna '2003-12-31 00:00:00'"
   },
   {
     "grupo": "tiempo",
-    "nombre": "TIMESTAMPADD(interval,int_expr,datetime)",
-    "descripcion": "Suma la expresión entera int_expr a la expresión de fecha o fecha y hora datetime_expr. Las unidades para int_expr se toman del argumento interval, que debe ser uno de los siguiente: FRAC_SECOND, SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER o YEAR.",
+    "nombre": "TIMESTAMPADD(interval,int_expr,date)",
+    "descripcion": "Suma la expresión entera 'int_expr' a la expresión de fecha o fecha y hora 'date'. Las unidades para 'int_expr' se toman del argumento interval, que debe ser uno de los siguiente: FRAC_SECOND, SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER o YEAR.",
     "ejemplo": "TIMESTAMPADD(MINUTE,1,'2003-01-02') retorna '2003-01-02 00:01:00'"
   },
   {
     "grupo": "tiempo",
-    "nombre": "TIMESTAMPDIFF(interval,datetime_expr1,datetime_expr2)",
-    "descripcion": "Devuelve la diferencia entera entre las expresiones fecha o fecha y hora datetime_expr1 y datetime_expr2. Las unidades para el resultado vienen dadas por el argumento interval. Los valores legales para interval son los mismos que se mencionan en la descripción de la función.",
+    "nombre": "TIMESTAMPDIFF(interval,datetime_expr1,date)",
+    "descripcion": "Devuelve la diferencia entera entre las expresiones fecha o fecha y 'hora datetime_expr1' y 'date'. Las unidades para el resultado vienen dadas por el argumento interval. Los valores legales para interval son los mismos que se mencionan en la descripción de la función.",
     "ejemplo": "TIMESTAMPDIFF(MONTH,'2003-02-01','2003-05-01') retorna 3"
   },
   {
@@ -446,7 +446,7 @@
   {
     "grupo": "tiempo",
     "nombre": "TO_DAYS(date)",
-    "descripcion": "Dada la fecha date, devuelve el número del día (el número de días desde el año 0).",
+    "descripcion": "Dada la fecha 'date', devuelve el número del día (el número de días desde el año 0).",
     "ejemplo": "TO_DAYS('1997-10-07') retorna  80580"
   },
   {
@@ -482,24 +482,24 @@
   {
     "grupo": "cadena",
     "nombre": "ASCII(str)",
-    "descripcion": "Devuelve el valor de código ASCII del carácter más a la izquierda de la cadena str. Devuelve 0 si str es una cadena vacía. Devuelve NULL si str es NULL.",
+    "descripcion": "Devuelve el valor de código ASCII del carácter más a la izquierda de la cadena 'str'. Devuelve 0 si str es una cadena vacía. Devuelve NULL si str es NULL.",
     "ejemplo": "ASCII('2') retorna  50"
   },
   {
     "grupo": "cadena",
-    "nombre": "BIN(N)",
-    "descripcion": "Devuelve una cadena que representa el valor binario de N, donde N es un número longlong (BIGINT). Es equivalente a CONV(N,10,2). Devuelve NULL si N es NULL.",
+    "nombre": "BIN(X)",
+    "descripcion": "Devuelve una cadena que representa el valor binario de 'X', donde 'X' es un número long (BIGINT). Es equivalente a CONV(N,10,2). Devuelve NULL si 'X' es NULL.",
     "ejemplo": "BIN(12) retorna 1100"
   },
   {
     "grupo": "cadena",
     "nombre": "BIT_LENGTH(str)",
-    "descripcion": "Devuelve la longitud de la cadena str en bits.",
+    "descripcion": "Devuelve la longitud de la cadena 'str' en bits.",
     "ejemplo": "BIT_LENGTH('text') retorna 32"
   },
   {
     "grupo": "cadena",
-    "nombre": "CHAR(N,...)",
+    "nombre": "CHAR(N)",
     "descripcion": "Interpreta los argumentos como enteros y devuelve una cadena que consiste en los caracteres dados por los valores de los códigos ASCII de esos enteros. Los valores NULL se saltan.",
     "ejemplo": "CHAR(77,121,83,81,'76') retorna MySQL"
   },
@@ -511,26 +511,26 @@
   },
   {
     "grupo": "cadena",
-    "nombre": "COMPRESS(string_to_compress)",
+    "nombre": "COMPRESS(str)",
     "descripcion": "Comprime una cadena.",
     "ejemplo": "LENGTH(COMPRESS(REPEAT(\"a\",1000))) retorna 21"
   },
   {
     "grupo": "cadena",
-    "nombre": "CONCAT(str1,str2,...)",
+    "nombre": "CONCAT(str,str2,...)",
     "descripcion": "Devuelve la cadena resultante de concatenar los argumentos. Devuelve NULL si alguno de los argumentos es NULL. Puede haber más de 2 argumentos. Un argumento numérico se convierte a su cadena equivalente.",
     "ejemplo": "CONCAT('My', 'S', 'QL') retorna MySQL"
   },
   {
     "grupo": "cadena",
-    "nombre": "CONCAT_WS(separator, str1, str2,...)",
+    "nombre": "CONCAT_WS(separator,str, str2,...)",
     "descripcion": "El primer argumento es el separador para el resto de los argumentos. El separador se añade entre las cadenas a concatenar: El separador puede ser una cadena, igual que el resto de los argumentos. Si el separador es NULL, el resultado es NULL. La función pasa por alto cualquier valor NULL después del argumento separador.",
     "ejemplo": "CONCAT_WS(\",\",\"First name\",\"Second name\",\"Last Name\") retorna First name,Second name,Last Name "
   },
   {
     "grupo": "cadena",
-    "nombre": "CONV(N,from_base,to_base)",
-    "descripcion": "Convierte números entre distintas bases. Devuelve una cadena que representa el número N, convertido desde la base from_base a la base to_base.",
+    "nombre": "CONV(X,from_base,to_base)",
+    "descripcion": "Convierte números entre distintas bases. Devuelve una cadena que representa el número 'X', convertido desde la base from_base a la base to_base.",
     "ejemplo": "CONV(\"a\",16,2) retorna 1010"
   },
   {
@@ -553,43 +553,43 @@
   },
   {
     "grupo": "cadena",
-    "nombre": "HEX(N_or_S)",
-    "descripcion": "Si N_OR_S es un número, devuelve una cadena que representa el valor hexadecimal de N, donde N es un número longlong (BIGINT).",
+    "nombre": "HEX(X)",
+    "descripcion": "Si 'X' es un número, devuelve una cadena que representa el valor hexadecimal de N, donde N es un número long (BIGINT).",
     "ejemplo": "HEX(255) retorna FF"
   },
   {
     "grupo": "cadena",
     "nombre": "INSERT(str,pos,len,newstr)",
-    "descripcion": "Devueve la cadena str, con la subcadena que empieza en la posición pos y de len caracteres de longitud remplazada con la cadena newstr.",
+    "descripcion": "Devueve la cadena 'str', con la subcadena que empieza en la posición 'pos' y de 'len' caracteres de longitud remplazada con la cadena 'newstr'.",
     "ejemplo": "INSERT('Quadratic', 3, 4, 'What') retorna QuWhattic"
   },
   {
     "grupo": "cadena",
     "nombre": "INSTR(str,substr)",
-    "descripcion": "Devuelve la posición de la primera aparición de la subcadena substr dentro de la cadena str. Es lo mismo que la forma de con dos argumentos, excepto que los argumentos están intercambiados.",
+    "descripcion": "Devuelve la posición de la primera aparición de la subcadena 'substr' dentro de la cadena 'str'. Es lo mismo que la forma de con dos argumentos, excepto que los argumentos están intercambiados.",
     "ejemplo": "INSTR('foobarbar', 'bar') retorna 4"
   },
   {
     "grupo": "cadena",
     "nombre": "LCASE(str)",
-    "descripcion": "Devuelve la cadena str cono todos los caracteres cambiados a minúsculas de acuerdo con el mapa de caracteres actual (por defecto es ISO-8859-1 Latin1). LCASE() es sinónimo de LOWER().",
+    "descripcion": "Devuelve la cadena 'str' con todos los caracteres cambiados a minúsculas de acuerdo con el mapa de caracteres actual (por defecto es ISO-8859-1 Latin1). LCASE() es sinónimo de LOWER().",
     "ejemplo": "LOWER('QUADRATICALLY') retorna 'quadratically'"
   },
   {
     "grupo": "cadena",
-    "nombre": "LEFT(cadena,longitud)",
-    "descripcion": "Devuelve los 'longitud' caracteres de la izquierda de la 'cadena'.",
+    "nombre": "LEFT(str,longitud)",
+    "descripcion": "Devuelve los 'longitud' caracteres de la izquierda de la 'str'.",
     "ejemplo": "LEFT('MySQL con Clase', 5) retorna MySQL"
   },
   {
     "grupo": "cadena",
     "nombre": "LENGTH(str)",
-    "descripcion": "Devuelve la longitud de la cadena str, medida en bytes. Un carácter multibyte cuenta cómo bytes múltiples.",
+    "descripcion": "Devuelve la longitud de la cadena 'str', medida en bytes. Un carácter multibyte cuenta cómo bytes múltiples.",
     "ejemplo": "LENGTH('text') retornar 4"
   },
   {
     "grupo": "cadena",
-    "nombre": "LOAD_FILE(file_name)",
+    "nombre": "LOAD_FILE(str)",
     "descripcion": "Lee el fichero y devuelve su contenido como una cadena. El fichero debe estar en el servidor, se debe especificar el camino completo al fichero, y se debe poseer el privilegio FILE.",
     "ejemplo": "UPDATE tbl_name SET blob_column=LOAD_FILE(\"/tmp/picture\") WHERE id=1;"
   },
@@ -602,7 +602,7 @@
   {
     "grupo": "cadena",
     "nombre": "LPAD(str,len,padstr)",
-    "descripcion": "Devuelve la cadena str, rellenada a la izquierda con la cadena padstr hasta la longitud de len caracteres. Si str es más larga que len, el valor retornado se acorta hasta len caracteres.",
+    "descripcion": "Devuelve la cadena 'str', rellenada a la izquierda con la cadena 'padstr' hasta la longitud de len caracteres. Si 'str' es más larga que 'len', el valor retornado se acorta hasta len caracteres.",
     "ejemplo": "LPAD('hi',4,'??') retorna ??hi"
   },
   {
@@ -613,14 +613,14 @@
   },
   {
     "grupo": "cadena",
-    "nombre": "OCT(N)",
-    "descripcion": "Devuelve una cadena que representa el valor octal de N, donde N es un número BIGINT. Es equivalente a . Devuelve NULL si N es NULL.",
+    "nombre": "OCT(X)",
+    "descripcion": "Devuelve una cadena que representa el valor octal de 'X', donde 'X' es un número BIGINT. Es equivalente a  Devuelve NULL si 'X' es NULL.",
     "ejemplo": "OCT(12) retorna 14"
   },
   {
     "grupo": "cadena",
     "nombre": "ORD(str)",
-    "descripcion": "Si el carácter de la izquierda de la cadena str es un carácter multibyte, devuelve el código del carácter, calculado a partir de los valores de los códigos ASCII de los carácteres que lo componen, usando esta fórmula: (código ASCII del primer byte)*256+(código ASCII del segundo byte))[*256+código ASCII del tercer bytee...]. Si el carácter no es multibyte, devuelve el mismo valor que la función.",
+    "descripcion": "Si el carácter de la izquierda de la cadena 'str' es un carácter multibyte, devuelve el código del carácter, calculado a partir de los valores de los códigos ASCII de los carácteres que lo componen, usando esta fórmula: (código ASCII del primer byte)*256+(código ASCII del segundo byte))[*256+código ASCII del tercer bytee...]. Si el carácter no es multibyte, devuelve el mismo valor que la función.",
     "ejemplo": "ORD('2') retorna 50"
   },
   {
@@ -632,80 +632,80 @@
   {
     "grupo": "cadena",
     "nombre": "REPEAT(str,count)",
-    "descripcion": "Devuelve una cadena que consiste en la cadena str repetida count veces. Si count <= 0, devuelve una cadena vacía. Devuelve NULL si str o count son NULL.",
+    "descripcion": "Devuelve una cadena que consiste en la cadena 'str' repetida 'count' veces. Si 'count' <= 0, devuelve una cadena vacía. Devuelve NULL si 'str' o 'count' son NULL.",
     "ejemplo": "REPEAT('MySQL', 3) retorna MySQLMySQLMySQL"
   },
   {
     "grupo": "cadena",
     "nombre": "REPLACE(str,from_str,to_str)",
-    "descripcion": "Devuelve la cadena str con todas las apariciones de la cadena from_str sustituídas por la cadena to_str.",
+    "descripcion": "Devuelve la cadena 'str' con todas las apariciones de la cadena 'from_str' sustituídas por la cadena 'to_str'.",
     "ejemplo": "REPLACE('www.mysql.com', 'w', 'Ww') retorna WwWwWw.mysql.com"
   },
   {
     "grupo": "cadena",
     "nombre": "REVERSE(str)",
-    "descripcion": "Devuelve la cadena str con el orden de los caracteres invertido.",
+    "descripcion": "Devuelve la cadena 'str' con el orden de los caracteres invertido.",
     "ejemplo": "REVERSE('abc') retorna 'cba'"
   },
   {
     "grupo": "cadena",
-    "nombre": "RIGHT(cadena,longitud)",
-    "descripcion": "Devuelve los 'longitud' caracteres de la derecha de la 'cadena'",
+    "nombre": "RIGHT(str,longitud)",
+    "descripcion": "Devuelve los 'longitud' caracteres de la derecha de la 'str'",
     "ejemplo": "RIGHT('MySQL con Clase', 9) retorna 'con clase'"
   },
   {
     "grupo": "cadena",
     "nombre": "RPAD(str,len,padstr)",
-    "descripcion": "Devuelve la cadena str, rellenada a la derecha con la cadena padstr hasta la longitud de len caracteres. Si str es más larga que len, el valor retornado se acorta hasta len caracteres.",
+    "descripcion": "Devuelve la cadena 'str', rellenada a la derecha con la cadena 'padstr' hasta la longitud de len caracteres. Si 'str' es más larga que 'len', el valor retornado se acorta hasta 'len' caracteres.",
     "ejemplo": "RPAD('hi',5,'?') retorna hi???"
   },
   {
     "grupo": "cadena",
     "nombre": "RTRIM(str)",
-    "descripcion": "Devuelve la cadena str con los caracteres de espacios finales eliminados.",
+    "descripcion": "Devuelve la cadena 'str' con los caracteres de espacios finales eliminados.",
     "ejemplo": "RTRIM('alex   ') retorna 'alex'"
   },
   {
     "grupo": "cadena",
     "nombre": "SOUNDEX(str)",
-    "descripcion": "Devuelve una cadena 'soundex' desde str. Dos cadenas que suenen casi igual tienen cadenas soundex idénticas. Una cade soundex estándar tiene 4 caracteres de longitud, pero SOUNDEX() devuelve una cadena de longitud arbitraria. Se puede usar sobre el resultado para obtener una cadena soundex estándar. Cualquier carácter no alfanumérico será ignorado. Todos los caracteres alfabéticos fuera del rango A-Z serán tratados como vocales",
+    "descripcion": "Devuelve una cadena 'soundex' desde 'str'. Dos cadenas que suenen casi igual tienen cadenas soundex idénticas. Una cade soundex estándar tiene 4 caracteres de longitud, pero SOUNDEX() devuelve una cadena de longitud arbitraria. Se puede usar sobre el resultado para obtener una cadena soundex estándar. Cualquier carácter no alfanumérico será ignorado. Todos los caracteres alfabéticos fuera del rango A-Z serán tratados como vocales",
     "ejemplo": "SOUNDEX('Alexander') retorna A42536"
   },
   {
     "grupo": "cadena",
-    "nombre": "SPACE(N)",
-    "descripcion": "Devuelve una cadena que consiste en N caracteres espacio.",
+    "nombre": "SPACE(X)",
+    "descripcion": "Devuelve una cadena que consiste en X caracteres espacio.",
     "ejemplo": "SPACE(6) retorna '      '"
   },
   {
     "grupo": "cadena",
-    "nombre": "STRCMP(expr1,expr2)",
+    "nombre": "STRCMP(str,expr2)",
     "descripcion": "Devuelve 0 si las cadenas son iguales, -1 si el primer argumento es menor que el segundo, según el orden de ordenamiento de cadenas actual, y 1 en otro caso.",
     "ejemplo": "STRCMP('text', 'text2') retorna -1"
   },
   {
     "grupo": "cadena",
-    "nombre": "SUBSTRING(cadena,posicion)",
-    "descripcion": "Los formatos sin el argumento 'longitud' devuelve una subcadena de la 'cadena' empezando en la 'posicion'. Los formatos con el argumento 'longitud' devuelven una subcadena de 'longitud' caracteres desde la 'cadena', comenzando en la 'posicion'. MID(str,pos,len) es sinónimo de SUBSTRING(str,pos,len).",
+    "nombre": "SUBSTRING(str,posicion)",
+    "descripcion": "Los formatos sin el argumento 'longitud' devuelve una subcadena de la 'str' empezando en la 'posicion'. Los formatos con el argumento 'longitud' devuelven una subcadena de 'longitud' caracteres desde la 'cadena', comenzando en la 'posicion'. MID(str,pos,len) es sinónimo de SUBSTRING(str,pos,len).",
     "ejemplo": "SUBSTRING('MySQL con Clase',7) retorna con Clase"
   },
   {
     "grupo": "cadena",
     "nombre": "SUBSTRING_INDEX(str,delim,count)",
-    "descripcion": "Devuelve la subcadena de str anterior a la aparición de count veces el delimitador delim. Si count es positivo, se retorna todo lo que haya a la izquierda del delimitador final (contando desde la izquierda). Si count es negativo, se devuelve todo lo que haya a la derecha del delimitador final (contando desde la derecha).",
+    "descripcion": "Devuelve la subcadena de 'str' anterior a la aparición de count veces el delimitador delim. Si count es positivo, se retorna todo lo que haya a la izquierda del delimitador final (contando desde la izquierda). Si count es negativo, se devuelve todo lo que haya a la derecha del delimitador final (contando desde la derecha).",
     "ejemplo": "SUBSTRING_INDEX('www.mysql.com', '.', 2) retorna www.mysql"
   },
   {
     "grupo": "cadena",
     "nombre": "TRIM(str)",
-    "descripcion": "Devuelve la cadena str eliminando todos los prefijos y/o sufijos remstr. Si no se incluye ninguno de los especificadores BOTH, LEADING o TRAILING, se asume BOTH. Si no se especifica la cadena remstr, se eliminan los espacios.",
+    "descripcion": "Devuelve la cadena 'str' eliminando todos los prefijos y/o sufijos. Si no se incluye ninguno de los especificadores BOTH, LEADING o TRAILING, se asume BOTH. Si no se especifica la cadena remstr, se eliminan los espacios.",
     "ejemplo": "TRIM('  bar   ') retorna bar"
   },
   {
     "grupo": "cadena",
     "nombre": "UCASE(str)",
-    "descripcion": "Devuelve la cadena str con todos sus caracteres sustituidos a mayúsculas de acuerdo con el mapa del conjunto de caracteres actual (por defecto es ISO-8859-1 Latin1). UCASE() es sinónimo de UPPER().",
-    "ejemplo": "UPPER('Alexander') retorna 'Hej'"
+    "descripcion": "Devuelve la cadena 'str' con todos sus caracteres sustituidos a mayúsculas de acuerdo con el mapa del conjunto de caracteres actual (por defecto es ISO-8859-1 Latin1). UCASE() es sinónimo de UPPER().",
+    "ejemplo": "UPPER('Alexander') retorna 'ALEXANDER'"
   },
   {
     "grupo": "cadena",
@@ -715,80 +715,80 @@
   },
   {
     "grupo": "conversion",
-    "nombre": "CAST(expression AS type)",
+    "nombre": "CAST(X AS type)",
     "descripcion": "Las funciones CAST() y CONVERT() pueden usarse para tomar un valor de un tipo y obtener uno de otro tipo.",
     "ejemplo": "SELECT CAST('2000-01-01' AS DATE)"
   },
   {
     "grupo": "conversion",
-    "nombre": "CONVERT(expression,type)",
+    "nombre": "CONVERT(X,type)",
     "descripcion": "CONVERT() con USING se usa para convertir datos entre diferentes juegos de caracteres. En MySQL, los nombres de traducción son los mismos que los nombres de los juegos de caracteres correspondientes.",
     "ejemplo": "SELECT CONVERT('abc' USING utf8)"
   },
   {
     "grupo": "encriptado",
-    "nombre": "AES_ENCRYPT(string,key_string)",
+    "nombre": "AES_ENCRYPT(str,key_string)",
     "descripcion": "Esta funcion permite encriptar datos usando el algoritmo oficial AES (Advanced Encryption Standard), conocido previamente como Rijndael. Se usa una codificación con una clave de 128 bits de longitud, pero se puede extender a 256 modificando el fuente. Se ha seleccionado 128 bits porque es mucho más rápido y normalemente es proporciona suficiente seguridad. Los argumentos de entrada pueden ser de cualquier longitud. Si cualquier argumento es NULL, el resultado de la función es también NULL. Como AES es un algoritmo a nivel de bloque, se usa relleno para codificar cadenas de longitud irregular y entonces la longitud de la cadena resultante puede ser calculada como 16*(trunc(string_length/16)+1).",
     "ejemplo": "INSERT INTO t VALUES (1,AES_ENCRYPT('text','password'))"
   },
   {
     "grupo": "encriptado",
-    "nombre": "AES_DECRYPT(string,key_string)",
+    "nombre": "AES_DECRYPT(str,key_string)",
     "descripcion": "Esta funcion permite desencriptar datos usando el algoritmo oficial AES (Advanced Encryption Standard), conocido previamente como Rijndael. Se usa una codificación con una clave de 128 bits de longitud, pero se puede extender a 256 modificando el fuente. Se ha seleccionado 128 bits porque es mucho más rápido y normalemente es proporciona suficiente seguridad. Los argumentos de entrada pueden ser de cualquier longitud. Si cualquier argumento es NULL, el resultado de la función es también NULL. Como AES es un algoritmo a nivel de bloque, se usa relleno para codificar cadenas de longitud irregular y entonces la longitud de la cadena resultante puede ser calculada como 16*(trunc(string_length/16)+1).",
     "ejemplo": "AES_DECRYPT('text','password'))"
   },
   {
     "grupo": "encriptado",
-    "nombre": "DECODE(crypt_str,pass_str)",
-    "descripcion": "Desencripta la cadena encriptada crypt_str usando como contraseña pass_str.",
+    "nombre": "DECODE(str,pass_str)",
+    "descripcion": "Desencripta la cadena encriptada 'str' usando como contraseña 'pass_str'.",
     "ejemplo": "DECODE('text','password'))"
   },
   {
     "grupo": "encriptado",
-    "nombre": "DES_DECRYPT(string_to_decrypt [, key_string])",
+    "nombre": "DES_DECRYPT(str [, key_string])",
     "descripcion": "Desencripta una cadena encriptada. Esta función sólo funciona si MySQL ha sido configurado para soportar SSL. Si no se proporciona el argumento key_string, DES_DECRYPT() examina el primer byte de la cadena encriptada para determinar el número de clave DES que se usó en la cadena original encriptada, a continuación lee la clave desde el fichero de claves des para desencriptar el mensaje.",
     "ejemplo": ""
   },
   {
     "grupo": "encriptado",
-    "nombre": "DES_ENCRYPT(string_to_encrypt [, (key_number | key_string) ] ))",
+    "nombre": "DES_ENCRYPT(str [, (key_number | key_string) ] ))",
     "descripcion": "Encripta la cadena con la clave dada usando el algoritmo Triple-DES. Esta función sólo funciona si MySQL fue configurado con soporte SSL.",
     "ejemplo": "SELECT customer_address FROM customer_table WHERE crypted_credit_card = DES_ENCRYPT(\"credit_card_number\")"
   },
   {
     "grupo": "encriptado",
     "nombre": "ENCODE(str,pass_str)",
-    "descripcion": "Encripta la cadena str usando como contraseña pass_str. Para desencriptar el resultado usar . El resultado es una cadena binaria de la misma longitud que string. Si se quiere almacenar el resultado en una columna, se debe usar una columna de tipo BLOB.",
+    "descripcion": "Encripta la cadena 'str' usando como contraseña 'pass_str'. Para desencriptar el resultado usar . El resultado es una cadena binaria de la misma longitud que string. Si se quiere almacenar el resultado en una columna, se debe usar una columna de tipo BLOB.",
     "ejemplo": ""
   },
   {
     "grupo": "encriptado",
     "nombre": "ENCRYPT(str[,salt])",
-    "descripcion": "Encripta str usando la llamada del sistema Unix crypt().",
+    "descripcion": "Encripta 'str' usando la llamada del sistema Unix crypt().",
     "ejemplo": "SELECT ENCRYPT(\"hello\") retorna 'VxuFAJXVARROc'"
   },
   {
     "grupo": "encriptado",
-    "nombre": "MD5(string)",
-    "descripcion": "Calcula un checksum MD5 de 128 bits para la cadena string. El valor se devuelve como un número hexadecimal de 32 dígitos que puede, por ejemplo, usarse como una clave hash.",
+    "nombre": "MD5(str)",
+    "descripcion": "Calcula un checksum MD5 de 128 bits para la cadena 'str'. El valor se devuelve como un número hexadecimal de 32 dígitos que puede, por ejemplo, usarse como una clave hash.",
     "ejemplo": "SELECT MD5(\"testing\") retorna ae2b1fca515949e5d54fb22b8ed95575"
   },
   {
     "grupo": "encriptado",
     "nombre": "PASSWORD(str)",
-    "descripcion": "Calcula una cadena contraseña a partir de la cadena en texto plano str.",
+    "descripcion": "Calcula una cadena contraseña a partir de la cadena en texto plano 'str'.",
     "ejemplo": "SELECT PASSWORD('badpwd') retorna '7f84554057dd964b'"
   },
   {
     "grupo": "encriptado",
-    "nombre": "SHA1(string)",
-    "descripcion": "Calcula un checksum SHA1 de 160 bits para la cadena string, como se describe en RFC 3174 (Secure Hash Algorithm). El valor se devuelve como un número hexadecimal de 40 dígitos, o NULL en caso de que el argumento de entrada sea NULL. SHA() es sinónimo de SHA1().",
+    "nombre": "SHA1(str)",
+    "descripcion": "Calcula un checksum SHA1 de 160 bits para la cadena 'str', como se describe en RFC 3174 (Secure Hash Algorithm). El valor se devuelve como un número hexadecimal de 40 dígitos, o NULL en caso de que el argumento de entrada sea NULL. SHA() es sinónimo de SHA1().",
     "ejemplo": " SHA1(\"abc\") retorna 'a9993e364706816aba3e25717850c26c9cd0d89d'"
   },
   {
     "grupo": "informacion",
-    "nombre": "BENCHMARK(count,expr)",
-    "descripcion": "La función BENCHMARK() ejecuta la expresión expr count veces. Puede usarse para medir cuan rápido procesa la expresión MySQL. El valor resultado siempre es cero. La intención es usarla en el cliente mysql, que informa del tiempo que ha requerido la ejecución de la consulta.",
+    "nombre": "BENCHMARK(count,str)",
+    "descripcion": "La función BENCHMARK() ejecuta la expresión 'str' 'count' veces. Puede usarse para medir cuan rápido procesa la expresión MySQL. El valor resultado siempre es cero. La intención es usarla en el cliente mysql, que informa del tiempo que ha requerido la ejecución de la consulta.",
     "ejemplo": "SELECT BENCHMARK(1000000,ENCODE('hello','goodbye')) retorna 0"
   },
   {
@@ -835,7 +835,7 @@
   },
   {
     "grupo": "informacion",
-    "nombre": "LAST_INSERT_ID([expr])",
+    "nombre": "LAST_INSERT_ID(str)",
     "descripcion": "Devuelve el último valor generado automáticamente que fue insertado en una columna AUTO_INCREMENT.",
     "ejemplo": " UPDATE sequence SET id=LAST_INSERT_ID(id+1);"
   },
@@ -853,64 +853,231 @@
   },
   {
     "grupo": "groupby",
-    "nombre": "AVG(expr)",
-    "descripcion": "Devuelve el valor medio de expr.",
+    "nombre": "AVG(X)",
+    "descripcion": "Devuelve el valor medio de 'X'.",
     "ejemplo": "SELECT student_name, AVG(test_score) FROM student GROUP BY student_name"
   },
   {
     "grupo": "groupby",
-    "nombre": "COUNT(expr)",
+    "nombre": "COUNT(X)",
     "descripcion": "Devuelve un contador con el número de valores distintos de NULL en las filas recuperadas por una sentencia.",
     "ejemplo": "SELECT student.student_name,COUNT(*) FROM student,course WHERE student.student_id=course.student_id GROUP BY student_name;"
   },
   {
     "grupo": "groupby",
-    "nombre": "COUNT(DISTINCT expr,[expr...])",
+    "nombre": "COUNT(DISTINCT X,[expr...])",
     "descripcion": "Devuelve un contador con el número de valores diferentes, distintos de NULL.",
     "ejemplo": "SELECT COUNT(DISTINCT results) FROM student"
   },
   {
     "grupo": "groupby",
-    "nombre": "GROUP_CONCAT(expr)",
+    "nombre": "GROUP_CONCAT(X)",
     "descripcion": "Esta función se añadió en MySQL 4.1. Devuelve una cadena con la concatenación de los valores del grupo.",
-    "ejemplo": "SELECT student_name,GROUP_CONCAT(DISTINCT test_score ORDER BY test_score DESC SEPARATOR FROM student GROUP BY student_name;"
+    "ejemplo": "SELECT student_name,GROUP_CONCAT(DISTINCT test_score ORDER BY test_score DESC SEPARATOR FROM student GROUP BY student_name);"
   },
   {
     "grupo": "groupby",
-    "nombre": "MAX(expr)",
-    "descripcion": "Devuelve el valor máximo de expr.",
+    "nombre": "MAX(X)",
+    "descripcion": "Devuelve el valor máximo de 'X'.",
     "ejemplo": " SELECT student_name, MAX(test_score) FROM student GROUP BY student_name;"
   },
   {
     "grupo": "groupby",
-    "nombre": "MIN(expr)",
-    "descripcion": "Devuelve el valor mínimo de expr.",
+    "nombre": "MIN(X)",
+    "descripcion": "Devuelve el valor mínimo de 'X'.",
     "ejemplo": " SELECT student_name, MIN(test_score), MAX(test_score) FROM student GROUP BY student_name;"
   },
   {
     "grupo": "groupby",
-    "nombre": "STD(expr)",
+    "nombre": "STD(X)",
     "descripcion": "Devuelve la desviación estándar de la expresión.",
     "ejemplo": " "
   },
   {
     "grupo": "groupby",
-    "nombre": "STDDEV(expr)",
+    "nombre": "STDDEV(X)",
     "descripcion": "Devuelve la desviación estándar de la expresión. El formato de STDDEV() de esta función se proporciona para compatibilidad con Oracle.",
     "ejemplo": " "
   },
   {
     "grupo": "groupby",
-    "nombre": "SUM(expr)",
+    "nombre": "SUM(X)",
     "descripcion": "Devuelve la suma de la expresión expr. Si el conjunto de resultados no tiene filas, devuelve NULL.",
     "ejemplo": ""
   },
   {
     "grupo": "groupby",
-    "nombre": "VARIANCE(expr)",
+    "nombre": "VARIANCE(X)",
     "descripcion": "Devuelve la varianza estándar de la expresión expr.",
     "ejemplo": " "
+  },
+  {
+    "grupo": "syndml",
+    "nombre": "DELETE",
+    "descripcion": "Borra los datos de una tabla especifica.",
+    "ejemplo": "DELETE FROM tbl_name WHERE 1>0;"
+  },
+  {
+    "grupo": "syndml",
+    "nombre": "DO",
+    "descripcion": "ejecuta las expresiones pero no devuelve ningún resultado. Esta es la abreviatura de SELECT expr, ..., pero tiene la ventaja de que es ligeramente más rápido cuando no te importa el resultado.",
+    "ejemplo": "Do expr;"
+  },
+  {
+    "grupo": "syndml",
+    "nombre": "HANDLER",
+    "descripcion": "La instrucción HANDLER ... OPEN abre una tabla, haciéndola accesible a través de las siguientes instrucciones HANDLER ... READ. Este objeto de tabla no se comparte con otros subprocesos y no se cierra hasta que el subproceso llama HANDLER ... CLOSE o el subproceso termina. Si abre la tabla utilizando un alias, las referencias adicionales a la tabla con otras instrucciones HANDLER deben utilizar el alias en lugar del nombre de la tabla.",
+    "ejemplo": "HANDLER tbl_name OPEN [ AS alias ] HANDLER tbl_name READ index_name { = | >= | <= | < } (value1,value2,...)    [ WHERE where_condition ] [LIMIT ... ]"
+  },
+  {
+    "grupo": "syndml",
+    "nombre": "INSERT",
+    "descripcion": "Inserta valores en una tabla especifica.",
+    "ejemplo": "INSERT INTO tbl_name (col1,col2) VALUES(15,col1*2);"
+  },
+  {
+    "grupo": "syndml",
+    "nombre": "LOAD DATA INFILE",
+    "descripcion": "La instrucción LOAD DATA INFILE lee las filas de un archivo de texto en una tabla a una velocidad muy alta.",
+    "ejemplo": "LOAD DATA [LOW_PRIORITY | CONCURRENT] [LOCAL] INFILE 'file_name.txt'    [REPLACE | IGNORE]    INTO TABLE tbl_name    [FIELDS        [TERMINATED BY '\t']        [[OPTIONALLY] ENCLOSED BY '']        [ESCAPED BY '\\' ]    ]    [LINES         [STARTING BY '']            [TERMINATED BY '\n']    ]    [IGNORE number LINES]    [(col_name,...)]"
+  },
+  {
+    "grupo": "syndml",
+    "nombre": "REPLACE",
+    "descripcion": "REPLACE funciona exactamente como INSERT, excepto que si un registro antiguo de la tabla tiene el mismo valor que un nuevo registro para una clave PRIMARY o un índice UNIQUE, el registro anterior se elimina antes de insertar el nuevo registro.",
+    "ejemplo": "REPLACE [LOW_PRIORITY | DELAYED]    [INTO] tbl_name [(col_name,...)]    SELECT ..."
+  },
+  {
+    "grupo": "syndml",
+    "nombre": "SELECT",
+    "descripcion": "SELECT se utiliza para recuperar filas seleccionadas de una o más tablas. El soporte para las sentencias y subconsultas UNION está disponible desde MySQL 4.0 y 4.1, respectivamente.",
+    "ejemplo": "SELECT t1.name, t2.salary FROM employee AS t1, info AS t2    WHERE t1.name = t2.name;"
+  },
+  {
+    "grupo": "syndml",
+    "nombre": "SUBQUERY",
+    "descripcion": "Una subconsulta es un simple operando. Por lo tanto, puede utilizarlo siempre que un valor de columna o literal sea legal, y puede esperar que tenga las características que tienen todos los operandos.",
+    "ejemplo": "SELECT UPPER((SELECT s1 FROM t1)) FROM t2;"
+  },
+  {
+    "grupo": "syndml",
+    "nombre": "TRUNCATE",
+    "descripcion": "TRUNCATE TABLE vacía una tabla completamente. Lógicamente, esto es equivalente a una instrucción DELETE que elimina todas las filas, pero hay diferencias prácticas en algunas circunstancias.",
+    "ejemplo": "TRUNCATE TABLE tbl_name;"
+  },
+  {
+    "grupo": "syndml",
+    "nombre": "UPDATE",
+    "descripcion": "La instrucción UPDATE actualiza las columnas de las filas de tabla existentes con nuevos valores.",
+    "ejemplo": "UPDATE persondata SET age=age+1;"
+  },
+  {
+    "grupo": "synddl",
+    "nombre": "ALTER DATABASE",
+    "descripcion": "ALTER DATABASE le permite cambiar las características generales de una base de datos. Estas características se almacenan en el archivo `db.opt 'en el directorio de base de datos. Para usar ALTER DATABASE, necesita el privilegio ALTER en la base de datos.",
+    "ejemplo": "ALTER DATABASE db_name    alter_specification [, alter_specification] ..."
+  },
+  {
+    "grupo": "synddl",
+    "nombre": "ALTER TABLE",
+    "descripcion": "Permite cambiar la estructura de una tabla existente",
+    "ejemplo": "ALTER [IGNORE] TABLE tbl_name    alter_specification [, alter_specification] ..."
+  },
+  {
+    "grupo": "synddl",
+    "nombre": "CREATE INDEX",
+    "descripcion": "Crea un indice sobre una tabla specifica",
+    "ejemplo": "CREATE [UNIQUE|FULLTEXT|SPATIAL] INDEX index_name [index_type]    ON tbl_name (index_col_name,...) index_col_name:    col_name [(length)] [ASC | DESC]"
+  },
+  {
+    "grupo": "synddl",
+    "nombre": "CREATE TABLE",
+    "descripcion": "Permite crear una tabla con un conjunto de columnas",
+    "ejemplo": "CREATE [TEMPORARY] TABLE [IF NOT EXISTS] tbl_name    [(create_definition,...)]    [table_options] [select_statement]"
+  },
+  {
+    "grupo": "synddl",
+    "nombre": "DROP DATABASE",
+    "descripcion": "Borra una base de datos especifica",
+    "ejemplo": "DROP DATABASE [IF EXISTS] db_name;"
+  },
+  {
+    "grupo": "synddl",
+    "nombre": "DROP TABLE",
+    "descripcion": "Borra una tabla especifica de la base de datos conectada",
+    "ejemplo": "DROP [TEMPORARY] TABLE [IF EXISTS]    tbl_name [, tbl_name] ...    [RESTRICT | CASCADE]"
+  },
+  {
+    "grupo": "synddl",
+    "nombre": "RENAME TABLE",
+    "descripcion": "Cambia el nombre de una o más tablas.",
+    "ejemplo": "RENAME TABLE tbl_name TO new_tbl_name    [, tbl_name2 TO new_tbl_name2] ..."
+  },
+  {
+    "grupo": "synddl",
+    "nombre": "DROP INDEX",
+    "descripcion": "Borra un indice de una tabla especifica",
+    "ejemplo": "DROP INDEX index_name ON tbl_name"
+  },
+  {
+    "grupo": "syntrans",
+    "nombre": "AUTOCOMMIT",
+    "descripcion": "De forma predeterminada, MySQL se ejecuta con el modo de autocommit habilitado. Esto significa que tan pronto como se ejecuta una instrucción que actualiza (modifica) una tabla, MySQL almacena la actualización en el disco. Si utiliza tablas seguras para transacciones (como InnoDB o BDB), puede deshabilitar el modo de autocomisión con la siguiente declaración:",
+    "ejemplo": "SET AUTOCOMMIT = 0;"
+  },
+  {
+    "grupo": "syntrans",
+    "nombre": "COMMIT",
+    "descripcion": "Graba los datos de la transacción en la base de datos.",
+    "ejemplo": "commit"
+  },
+  {
+    "grupo": "syntrans",
+    "nombre": "ROLLBACK",
+    "descripcion": "La instrucción SAVEPOINT establece un punto de guardado de transacciones con un nombre de identificador. Si la transacción actual ya tiene un punto de salvamento con el mismo nombre, se eliminará el punto de guardado antiguo y se establecerá uno nuevo.",
+    "ejemplo": "SAVEPOINT identifier ROLLBACK TO SAVEPOINT identifier"
+  },
+  {
+    "grupo": "syntrans",
+    "nombre": "LOCK TABLE",
+    "descripcion": "LOCK TABLES bloquea tablas para el subproceso actual. UNLOCK TABLES libera cualquier bloqueo que tenga el subproceso actual. Todas las tablas que están bloqueadas por el subproceso actual se desbloquean implícitamente cuando el subproceso emite otro LOCK TABLES o cuando se cierra la conexión al servidor. Nota: LOCK TABLES no es seguro para transacciones e implica implícitamente cualquier transacción activa antes de intentar bloquear las tablas. A partir de MySQL 4.0.2, para usar LOCK TABLES debe tener el privilegio LOCK TABLES y un privilegio SELECT para las tablas implicadas. En MySQL 3.23, debe tener privilegios SELECT, INSERT, DELETE y UPDATE para las tablas. Las principales razones para utilizar LOCK TABLES son para emular transacciones o para obtener más velocidad al actualizar tablas. Esto se explica con más detalle más adelante. Si un subproceso obtiene un bloqueo de lectura en una tabla, ese subproceso (y todos los otros subprocesos) sólo puede leer de la tabla. Si un subproceso obtiene un bloqueo WRITE en una tabla, sólo el hilo que sostiene el bloqueo puede leer o escribir en la tabla. Otros hilos están bloqueados. La diferencia entre READ LOCAL y READ es que READ LOCAL permite que las sentencias INSERT no conflictivas (inserciones simultáneas) se ejecuten mientras se mantiene el bloqueo. Sin embargo, esto no se puede utilizar si va a manipular los archivos de base de datos fuera de MySQL mientras mantiene el bloqueo. Cuando utilice LOCK TABLES, debe bloquear todas las tablas que va a utilizar en sus consultas. Mientras los bloqueos obtenidos con una sentencia LOCK TABLES están en vigor, no puede acceder a las tablas que no fueron bloqueadas por la sentencia. Además, no se puede utilizar una tabla bloqueada varias veces en una consulta; utilice alias para ello. Tenga en cuenta que en ese caso debe obtener un bloqueo para cada alias por separado.",
+    "ejemplo": "LOCK TABLES     tbl_name [AS alias] {READ [LOCAL] | [LOW_PRIORITY] WRITE}     [, tbl_name [AS alias] {READ [LOCAL] | [LOW_PRIORITY] WRITE}] ... UNLOCK TABLES "
+  },
+  {
+    "grupo": "procedures",
+    "nombre": "SP INSERT",
+    "descripcion": "Genera un procedimiento almacenado para la inserción de datos en una tabla. Este realiza un Mapeo de la tabla que se elige y genera el codigo SQL con los campos de entrada. La API reconoce los campos auto_incement y no los coloca como campos de entrada, sin embargo para las columnas que acepten o no valores nulos se genera el codigo automaticamente",
+    "ejemplo": "CREATE PROCEDURE SpInsert_detalles(IN cod_pag int(11), IN cantidad int(11), IN cod_lect int(11), IN cod_rubro tinyint(4), IN valor decimal(10,2)) insert into detalles (cod_pag,cantidad,cod_lect,cod_rubro,valor) values(cod_pag,cantidad,cod_lect,cod_rubro,valor)"
+  },
+  {
+    "grupo": "procedures",
+    "nombre": "SP DELETE",
+    "descripcion": "Genera un procedimiento almacenado para la ELIMINACIÓN de registros de una tabla. Este realiza un mapeo de la tabla que se elige y genera el codigo SQL con los campos de entrada. La API reconoce los campos registrados como PRIMARY KEY y los coloca como campos de entrada para la eliminación de una registro especifico.",
+    "ejemplo": "CREATE PROCEDURE `SpDeleteMedidores`(in id_med char(7)) delete from medidores where medidores.id_med=id_med"
+  },
+  {
+    "grupo": "procedures",
+    "nombre": "SP UPDATE",
+    "descripcion": "Genera un procedimiento almacenado para la ACTUALIZACIÒN de registros de una tabla. Este realiza un mapeo de la tabla que se elige y genera el codigo SQL con los campos de entrada. La API reconoce los campos registrados como PRIMARY KEY y los coloca como campos de entrada para la eliminación de una registro especifico, ademas coloca todo el resto de campos que no sean PRIMARY KEY e AUTO_INCREMENT de la tabla mapeada.",
+    "ejemplo": "CREATE PROCEDURE `SpUpdate_Usuarios`(in ced char(10),in nombres varchar(100), in tel_cel varchar(10), in paswd varchar(250), in roles varchar(50) )  update usuarios set nombres=nombres ,  tel_cel=tel_cel ,  paswd=md5(paswd), roles=roles where usuarios.ced=ced"
+  },
+  {
+    "grupo": "procedures",
+    "nombre": "SP SELECT",
+    "descripcion": "Genera un procedimiento almacenado para CONSULTA de registros de una tabla. Este realiza un mapeo de la tabla que se elige y genera el codigo SQL con los campos de entrada. La API reconoce los campos registrados como PRIMARY KEY y los coloca como campos de entrada para el filtro de uno registro especifico, ademas coloca todo el resto de campos para el retorno de la consulta.",
+    "ejemplo": "CREATE PROCEDURE `SpSelectMedidores`(in cod_cli int) select K.id_med,K.nombre, concat(K.id_med,' - (',K.nombre,')') medidor from VMedCliBar K where K.cod_cli=cod_cli"
+  },
+  {
+    "grupo": "procedures",
+    "nombre": "SP SIMPLE",
+    "descripcion": "Genera un procedimiento almacenado SIMPLE.",
+    "ejemplo": "CREATE PROCEDURE `SpSelectMedidores`(in cod_cli int) select K.id_med,K.nombre, concat(K.id_med,' - (',K.nombre,')') medidor from VMedCliBar K where K.cod_cli=cod_cli"
+  },
+  {
+    "grupo": "procedures",
+    "nombre": "SP COMPLEJO",
+    "descripcion": "Genera un procedimiento almacenado con estructura compleja.",
+    "ejemplo": "CREATE PROCEDURE `SpSelectMedidores`(in cod_cli int) select K.id_med,K.nombre, concat(K.id_med,' - (',K.nombre,')') medidor from VMedCliBar K where K.cod_cli=cod_cli"
   }
- 
+
 ]
- 

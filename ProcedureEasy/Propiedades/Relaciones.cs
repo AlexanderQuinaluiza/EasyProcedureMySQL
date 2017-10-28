@@ -12,7 +12,9 @@ namespace ProcedureEasy.Propiedades
    public class Relaciones
     {
         private String _const_name, _table_name, _column_name, _refe_table, _ref_column;
-
+        /// <summary>
+        /// set y get del nombre de la comlumna relacionada
+        /// </summary>
         public string Column_name
         {
             get
@@ -25,7 +27,9 @@ namespace ProcedureEasy.Propiedades
                 _column_name = value;
             }
         }
-
+        /// <summary>
+        /// set y get del nombre de la relación existente en la base de datos 
+        /// </summary>
         public string Const_name
         {
             get
@@ -38,7 +42,9 @@ namespace ProcedureEasy.Propiedades
                 _const_name = value;
             }
         }
-
+        /// <summary>
+        /// set y get de la tabla referenciada en la relación 
+        /// </summary>
         public string Refe_table
         {
             get
@@ -51,7 +57,9 @@ namespace ProcedureEasy.Propiedades
                 _refe_table = value;
             }
         }
-
+        /// <summary>
+        /// set y get de la columna refrenciada de la tabla referenciada
+        /// </summary>
         public string Ref_column
         {
             get
@@ -64,7 +72,9 @@ namespace ProcedureEasy.Propiedades
                 _ref_column = value;
             }
         }
-
+        /// <summary>
+        /// set y get de la tabla a la que se hace referecia 
+        /// </summary>
         public string Table_name
         {
             get

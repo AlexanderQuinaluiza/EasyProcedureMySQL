@@ -9,7 +9,7 @@ namespace ProcedureEasy
 /// Clase que contiene las propiedades de los campos necesarios para la manipulacion y construcción 
 /// de procedimientos alamcenados automaticamente.
 /// </summary>
-    public class Tabla:BaseDatos
+    public class EstructuraTabla:BaseDatos
     {
         private string _field;
         private string _type;
@@ -17,6 +17,7 @@ namespace ProcedureEasy
         private string _key;
         private string _default;
         private string _extra;
+       
         #region propiedades de la tabla
         /// <summary>
         /// * set o get el nombre del campo de la tabla.
@@ -114,6 +115,7 @@ namespace ProcedureEasy
                 _extra = value;
             }
         }
+       
         #endregion
 
     }

@@ -11,7 +11,7 @@ namespace ProcedureEasy
 /// </summary>
    class GenerarCodigoProcedure : Operaciones
     {
-       #region Metodos de generación de codigo [insert,update,delete,select,find]
+       #region Metodos de generación de codigo [insert,update,delete,select,Simple,Complejo]
 
         /// <summary>
         /// Método para generar el código de un procedimiento de actualización.
@@ -23,14 +23,16 @@ namespace ProcedureEasy
         {
             int resultado = 0;
             Conexion conectar = new Conexion();
-            List<Tabla> miTabla = new List<Tabla>();
+            List<EstructuraTabla> miTabla = new List<EstructuraTabla>();
 
             // conjunto de cadenas independientes para la construcción de un procedimiento de insersión en 
             // una base de datos
 
             #region cadenas de procedimientos
 
-            string comentario = "/** Procedimiento para insertar en la tabla " + conectar.NombreTabla + " **/ \n";
+            string comentario = "/*==============================================================*/ \n" +
+                                           "/* PROCEDURE: SpUpdate_" + conectar.NombreTabla + " */ \n" +
+                                           "/*==============================================================*/\n";
             string control = " drop procedure if exists SpUpdate_" + conectar.NombreTabla + " ; ";
             string cabezera = " create procedure SpUpdate_" + conectar.NombreTabla + "(";
             string cuerpo = " update " + conectar.NombreTabla + " set ";
@@ -42,7 +44,7 @@ namespace ProcedureEasy
             miTabla = estructuraTabla();
             // recorrer los items de la lista que carga la estructura de la tabla con sus propiedades
             // de la clase Tabla
-            foreach (Tabla item in miTabla)
+            foreach (EstructuraTabla item in miTabla)
             {// control si el campo es auto_increment no se insertara en el procedimiento
                 
                
@@ -74,14 +76,14 @@ namespace ProcedureEasy
             #endregion
             string[] contenido = { nombreProcedimiento, comentario, control, cabezera, cuerpo, where };
 
-            string codigo = contenido[2] + contenido[3] + contenido[4] + contenido[5];
+            string codigo = contenido[1] + "\n" + contenido[2] + "\n" + contenido[3] + "\n" + contenido[4] + "\n" + contenido[5];
             //validación de existencia del procedimiento.
             //creación del procedimiento en la base de dcatos
-            if (existeProcedimiento(nombreProcedimiento) == 0)
-            {
-                resultado = insertarCodigo(codigo);
-            }
-             return codigo;
+            // if (existeProcedimiento(nombreProcedimiento) == 0)
+            //{
+            //  resultado = insertarCodigo(codigo);
+            //}
+            return codigo;
         }
 
         /// <summary>
@@ -94,14 +96,16 @@ namespace ProcedureEasy
         {
             int resultado = 0;
             Conexion conectar = new Conexion();
-            List<Tabla> miTabla = new List<Tabla>();
+            List<EstructuraTabla> miTabla = new List<EstructuraTabla>();
 
             // conjunto de cadenas independientes para la construcción de un procedimiento de insersión en 
             // una base de datos
 
             #region cadenas de procedimientos
 
-            string comentario = "/** Procedimiento para insertar en la tabla " + conectar.NombreTabla + " **/ \n";
+            string comentario = "/*==============================================================*/ \n"+
+                                "/* PROCEDURE: SpInsert_" + conectar.NombreTabla +            " */ \n"+
+                                "/*==============================================================*/\n";
             string control = " drop procedure if exists SpInsert_" + conectar.NombreTabla + " ; ";
             string cabezera = " create procedure SpInsert_" + conectar.NombreTabla + "(";
             string cuerpo = " insert into " + conectar.NombreTabla + " (";
@@ -113,7 +117,7 @@ namespace ProcedureEasy
             miTabla = estructuraTabla();
             // recorrer los items de la lista que carga la estructura de la tabla con sus propiedades
             // de la clase Tabla
-            foreach (Tabla item in miTabla)
+            foreach (EstructuraTabla item in miTabla)
             {// control si el campo es auto_increment no se insertara en el procedimiento
 
                 if (item.Extra != "auto_increment")
@@ -136,13 +140,13 @@ namespace ProcedureEasy
             #endregion
             string[] contenido = { nombreProcedimiento, comentario, control, cabezera, cuerpo, values };
 
-            string codigo = contenido[2] + contenido[3] + contenido[4] + contenido[5];
+            string codigo = contenido[1]+ "\n"+ contenido[2] +"\n"+ contenido[3] +"\n"+ contenido[4] +"\n"+ contenido[5];
             //validación de existencia del procedimiento.
             //creación del procedimiento en la base de dcatos
-            if (existeProcedimiento(nombreProcedimiento)==0)
-            {
-                resultado = insertarCodigo(codigo);
-            }
+            //if (existeProcedimiento(nombreProcedimiento)==0)
+            //{
+            //    resultado = insertarCodigo(codigo);
+            //}
                
            
             return codigo;
@@ -157,14 +161,16 @@ namespace ProcedureEasy
         {
             int resultado = 0;
             Conexion conectar = new Conexion();
-            List<Tabla> miTabla = new List<Tabla>();
+            List<EstructuraTabla> miTabla = new List<EstructuraTabla>();
 
             // conjunto de cadenas independientes para la construcción de un procedimiento de insersión en 
             // una base de datos
 
             #region cadenas de procedimientos
 
-            string comentario = "/** Procedimiento para insertar en la tabla " + conectar.NombreTabla + " **/ \n";
+            string comentario = "/*==============================================================*/ \n" +
+                               "/* PROCEDURE: SpDelete_" + conectar.NombreTabla + " */\n" +
+                               "/*==============================================================*/\n"; 
             string control = " drop procedure if exists SpDelete_" + conectar.NombreTabla + " ; ";
             string cabezera = " create procedure SpDelete_" + conectar.NombreTabla + "(";
             string cuerpo = " delete from " + conectar.NombreTabla ;
@@ -176,7 +182,7 @@ namespace ProcedureEasy
             miTabla = estructuraTabla();
             // recorrer los items de la lista que carga la estructura de la tabla con sus propiedades
             // de la clase Tabla
-            foreach (Tabla item in miTabla)
+            foreach (EstructuraTabla item in miTabla)
             {// control si el campo es auto_increment no se insertara en el procedimiento
                              
               if (item.Key.Equals("PRI"))
@@ -195,13 +201,13 @@ namespace ProcedureEasy
             #endregion
             string[] contenido = { nombreProcedimiento, comentario, control, cabezera, cuerpo, where };
 
-            string codigo = contenido[2] + contenido[3] + contenido[4] + contenido[5];
+            string codigo = contenido[1] + "\n" + contenido[2] + "\n" + contenido[3] + "\n" + contenido[4] + "\n" + contenido[5];
             //validación de existencia del procedimiento.
             //creación del procedimiento en la base de dcatos
-            if (existeProcedimiento(nombreProcedimiento) == 0)
-            {
-                resultado = insertarCodigo(codigo);
-            }
+            //if (existeProcedimiento(nombreProcedimiento) == 0)
+            //{
+            //    resultado = insertarCodigo(codigo);
+            //}
 
 
             return codigo;
@@ -214,14 +220,16 @@ namespace ProcedureEasy
         {
             int resultado = 0;
             Conexion conectar = new Conexion();
-            List<Tabla> miTabla = new List<Tabla>();
+            List<EstructuraTabla> miTabla = new List<EstructuraTabla>();
 
             // conjunto de cadenas independientes para la construcción de un procedimiento de insersión en 
             // una base de datos
 
             #region cadenas de procedimientos
 
-            string comentario = "/** Procedimiento para insertar en la tabla " + conectar.NombreTabla + " **/ \n";
+            string comentario = "/*==============================================================*/ \n" +
+                                "/* PROCEDURE: SpSelect_" + conectar.NombreTabla + "         */ \n" +
+                                "/*==============================================================*/\n";
             string control = " drop procedure if exists SpSelect_" + conectar.NombreTabla + " ; ";
             string cabezera = " create procedure SpSelect_" + conectar.NombreTabla + "(";
             string cuerpo = " select " ;
@@ -233,7 +241,7 @@ namespace ProcedureEasy
             miTabla = estructuraTabla();
             // recorrer los items de la lista que carga la estructura de la tabla con sus propiedades
             // de la clase Tabla
-            foreach (Tabla item in miTabla)
+            foreach (EstructuraTabla item in miTabla)
             {// control si el campo es auto_increment no se insertara en el procedimiento
                 cuerpo += item.Field + ",";
             }
@@ -247,13 +255,13 @@ namespace ProcedureEasy
             #endregion
             string[] contenido = { nombreProcedimiento, comentario, control, cabezera, cuerpo, from };
 
-            string codigo = contenido[2] + contenido[3] + contenido[4] + contenido[5];
+            string codigo = contenido[1] + "\n" + contenido[2] + "\n" + contenido[3] + "\n" + contenido[4] + "\n" + contenido[5];
             //validación de existencia del procedimiento.
             //creación del procedimiento en la base de dcatos
-            if (existeProcedimiento(nombreProcedimiento) == 0)
-            {
-                resultado = insertarCodigo(codigo);
-            }
+            //if (existeProcedimiento(nombreProcedimiento) == 0)
+            //{
+            //    resultado = insertarCodigo(codigo);
+            //}
 
 
             return codigo;
@@ -269,14 +277,14 @@ namespace ProcedureEasy
         {
             int resultado = 0;
             Conexion conectar = new Conexion();
-            List<Tabla> miTabla = new List<Tabla>();
+            List<EstructuraTabla> miTabla = new List<EstructuraTabla>();
 
             // conjunto de cadenas independientes para la construcción de un procedimiento de insersión en 
             // una base de datos
 
             #region cadenas de procedimientos
 
-            string comentario = "/** Procedimiento para insertar en la tabla " + conectar.NombreTabla + " **/ \n";
+            string comentario = "/** Procedimiento para buscar en la tabla " + conectar.NombreTabla + " **/ \n";
             string control = " drop procedure if exists SpFind_" + conectar.NombreTabla + " ; ";
             string cabezera = " create procedure SpFind_" + conectar.NombreTabla + "( IN busqueda varchar(200)";
             string cuerpo = " select ";
@@ -289,7 +297,7 @@ namespace ProcedureEasy
             miTabla = estructuraTabla();
             // recorrer los items de la lista que carga la estructura de la tabla con sus propiedades
             // de la clase Tabla
-            foreach (Tabla item in miTabla)
+            foreach (EstructuraTabla item in miTabla)
             {// control si el campo es auto_increment no se insertara en el procedimiento
                 cuerpo += item.Field + ",";
                 
@@ -308,19 +316,95 @@ namespace ProcedureEasy
             #endregion
             string[] contenido = { nombreProcedimiento, comentario, control, cabezera, cuerpo,from, where };
 
-            string codigo = contenido[2] + contenido[3] + contenido[4] + contenido[5]+contenido[6];
+            string codigo = contenido[1] + "\n" + contenido[2] + "\n" + contenido[3] + "\n" + contenido[4] + "\n" + contenido[5];
             //validación de existencia del procedimiento.
             //creación del procedimiento en la base de dcatos
-            if (existeProcedimiento(nombreProcedimiento) == 0)
-            {
-                resultado = insertarCodigo(codigo);
-            }
+            //if (existeProcedimiento(nombreProcedimiento) == 0)
+            //{
+            //    resultado = insertarCodigo(codigo);
+            //}
+
+
+            return codigo;
+        }
+        /// <summary>
+        /// Metodo que genera un codigo simple de ejemplo de un procedimiento para MySQL.
+        /// </summary>
+        /// <returns>(string) Codigo de un Procedure simple.</returns>
+        public string CodigoSimpleProcedure()
+        {
+            int resultado = 0;
+            Conexion conectar = new Conexion();
+            List<EstructuraTabla> miTabla = new List<EstructuraTabla>();
+
+            // conjunto de cadenas independientes para la construcción de un procedimiento de insersión en 
+            // una base de datos
+
+            #region cadenas de procedimientos
+
+            string comentario = "/** Sintaxis del procedimiento simple   **/ \n";
+            string control = " drop procedure if exists SpSimple_nombre ; \n";
+            string cabezera = " create procedure SpSimple_nombre ( IN var1 varchar(100),OUT int,INOUT char(10)) \n";
+            string cuerpo = " /** solo se puede ejecutar una sentencia sql **/  \n";
+            string from = " select * from nombre_tabla; ";
+            string where = "  ";
+            string nombreProcedimiento = "SpSimple_nombre";
+            #endregion
+            // Label que imprime la cabezera de los procedimientos  
+
+           string[] contenido = { nombreProcedimiento, comentario, control, cabezera, cuerpo, from, where };
+
+            string codigo = contenido[1] + contenido[2] + contenido[3] + contenido[4] + contenido[5] + contenido[6];
+            //validación de existencia del procedimiento.
+            //creación del procedimiento en la base de dcatos
+            //if (existeProcedimiento(nombreProcedimiento) == 0)
+            //{
+            //    resultado = insertarCodigo(codigo);
+            //}
+
+
+            return codigo;
+        }
+        /// <summary>
+        /// Metodo que genera el codigo de un procedimiento almacenado complejo en MySQL.
+        /// </summary>
+        /// <returns>(string) Codigo del procedimiento almacenado </returns>
+        public string CodigoComplejoProcedure()
+        {
+            int resultado = 0;
+            Conexion conectar = new Conexion();
+            List<EstructuraTabla> miTabla = new List<EstructuraTabla>();
+
+            // conjunto de cadenas independientes para la construcción de un procedimiento de insersión en 
+            // una base de datos
+
+            #region cadenas de procedimientos
+
+            string comentario = "/** Sintaxis del procedimiento complejo   **/ \n";
+            string control = " drop procedure if exists SpNombre; \n";
+            string cabezera = " delimiter //  \n create procedure SpSimple_nombre \n ( IN var1 varchar(100),OUT int,INOUT char(10)) \n";
+            string cuerpo = "begin \n\n /** cuerpo del procedimiento almacenado  **/  \n\n end; \n // ";
+            string from = "  ";
+            string where = "  ";
+            string nombreProcedimiento = "SpNombre";
+            #endregion
+            // Label que imprime la cabezera de los procedimientos  
+
+            string[] contenido = { nombreProcedimiento, comentario, control, cabezera, cuerpo, from, where };
+
+            string codigo = contenido[1] + contenido[2] + contenido[3] + contenido[4] + contenido[5] + contenido[6];
+            //validación de existencia del procedimiento.
+            //creación del procedimiento en la base de dcatos
+            //if (existeProcedimiento(nombreProcedimiento) == 0)
+            //{
+            //    resultado = insertarCodigo(codigo);
+            //}
 
 
             return codigo;
         }
         #endregion
-     
-        
+
+
     }
 }

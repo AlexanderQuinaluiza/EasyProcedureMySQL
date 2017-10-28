@@ -19,9 +19,9 @@ namespace ProcedureEasy
         /// Metodo que mapa la tabla y obtiene paramatros de la Clase Tabla
         /// </summary>
         /// <returns> List de clase Tabla</returns>
-        protected List<Tabla> estructuraTabla()
+        protected List<EstructuraTabla> estructuraTabla()
         {
-            List<Tabla> estructura = new List<Tabla>();
+            List<EstructuraTabla> estructura = new List<EstructuraTabla>();
             Conexion conectar = new Conexion();
             try
             {
@@ -32,7 +32,7 @@ namespace ProcedureEasy
                 MySqlDataReader red = cmd.ExecuteReader();
                 while (red.Read())
                 {
-                    Tabla tab = new Tabla();
+                    EstructuraTabla tab = new EstructuraTabla();
                     tab.Field = red[0].ToString();
                     tab.Type = red[1].ToString();
                     tab.Null = red[2].ToString();
@@ -79,33 +79,6 @@ namespace ProcedureEasy
             }
             return exists;
         }
-        /// <summary>
-        /// Metodo que ejecuta el codigo generado  y lo ingresa en la base de datos MySQL.
-        /// </summary>
-        /// <param name="codigos"> string con el codigo listo para ejecutarse.</param>
-        /// <returns> int, número de filas ingresadas a la base de datos.
-        /// En el caso de creación de procedimientos almacenados y triggers el metodo retorna el numero cero(0)
-        /// si la execución fue la correcta.</returns>
-        protected int insertarCodigo(string codigos)
-        {
-            int resultado = 0;
-            Conexion conectar = new Conexion();
-            try
-            {   //consulta si ya existe ese procedimiento en la base conectada. 
-                string sql = codigos + " ;";
-                MySqlCommand cmd = new MySqlCommand(sql, conectar.Connection);
-                conectar.Connection.Open();
-                resultado = cmd.ExecuteNonQuery();
-                conectar.Connection.Close();
-
-            }
-            catch (Exception e)
-            {
-                new Exception(e.Message);
-            }
-            return resultado;
-        }
-       
      
         #endregion
     }

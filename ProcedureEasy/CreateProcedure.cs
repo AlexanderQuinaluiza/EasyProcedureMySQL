@@ -7,6 +7,8 @@ using MySql.Data.MySqlClient;
 using System.Web.Script.Serialization;
 using System.IO;
 using ProcedureEasy.Propiedades;
+using System.Data;
+using System.Drawing;
 
 namespace ProcedureEasy
 {
@@ -52,11 +54,15 @@ namespace ProcedureEasy
         /// Metodo que genera y inserta en la base de datos el procedimiento almacenado dependiendo
         /// del Tipo que elija.
         /// </summary>
-        /// <param name="tipoProcedimiento"> Número al que representa la numeración. <exemple>Tipo.Insert</exemple></param>
-        /// <returns>Int, número de filas insertadas. </returns>
-        public string createProcedimiento(Tipo tipoProcedimiento)
+        /// <param name="tipoProcedimiento"> Número al que representa la numeración. <example>Tipo.Insert</example></param>
+        /// <param name="nombreTabla"> Nombre de la tabla en la que se quiere ejecutar la operación. <example>"clientes"</example></param>
+        /// <returns>string, codigo del procedimiento almacenado. </returns>
+        public string createProcedimiento(Tipo tipoProcedimiento, string nombreTabla)
         {
             GenerarCodigoProcedure gc = new GenerarCodigoProcedure();
+            Conexion conectar = new Conexion();
+            conectar.NombreTabla = nombreTabla;
+           
             int num = (int)tipoProcedimiento;
             string resultado = null;
             switch (num)
@@ -76,17 +82,84 @@ namespace ProcedureEasy
                     resultado = gc.CodigoSelectProcedure();
                     break;
                 case 4:
-                    resultado = gc.CodigoFindProcedure();
+                    resultado = gc.CodigoSimpleProcedure();
                     break;
-                default:
+                case 5:
+                    resultado = gc.CodigoComplejoProcedure();
                     break;
             }
             return resultado;
         }
+
+        /// <summary>
+        /// Metodo que ejecuta el codigo generado  y lo ingresa en la base de datos MySQL.
+        /// </summary>
+        /// <param name="sql"> string con el codigo listo para ejecutarse.</param>
+        /// <returns> DataTable, datos que el MySQL retorne.
+        /// En el caso de creación de procedimientos almacenados el comando retorna el número cero(0)
+        /// si la execución fue la correcta.</returns>
+       public DataTable executarSql(string sql)
+        {
+            
+            Conexion conectar = new Conexion();
+            DataTable result = new DataTable();
+            if (conectar.Connection.State==ConnectionState.Open)
+            {
+                conectar.Connection.Close();
+            }
+            //consulta si ya existe ese procedimiento en la base conectada. 
+            string tipo = sql.Substring(0, 10).ToUpper();
+            int resultado = 0;
+            try
+            {
+                if ( tipo.Contains("SELECT")  )
+                {
+                    MySqlCommand cmd = new MySqlCommand(sql.Trim(), conectar.Connection);
+                    //cmd.CommandType = CommandType.Text;
+                    conectar.Connection.Open();
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    adapter.Fill(result);
+                    conectar.Connection.Close();
+                }
+                else
+                {
+                    MySqlCommand cmd = new MySqlCommand(sql.Trim(), conectar.Connection);
+                    conectar.Connection.Open();
+                     resultado = cmd.ExecuteNonQuery();
+                    if (resultado>=0)
+                    {
+                        result.Columns.Add("Estado",typeof(System.Drawing.Bitmap));
+                        result.Columns.Add("# Filas",typeof(string));
+                        result.Columns.Add("Consulta SQL Executada", typeof(string));
+                        result.Columns.Add("Mensaje",typeof(string));
+                        //Bitmap bmpImage = null;
+
+                        result.Rows.Add(new System.Drawing.Bitmap(@"C:\Users\Alexander\Documents\Visual Studio 2015\Projects\ProcedureEasy\ProcedureEasy\imagenes\hecho.png"), resultado +"", sql, "Execución correcta");
+                    }
+                                     
+                    conectar.Connection.Close();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                result.Columns.Add("Estado", typeof(System.Drawing.Bitmap));
+                result.Columns.Add("# Filas", typeof(string));
+                result.Columns.Add("Consulta SQL Executada", typeof(string));
+                result.Columns.Add("Mensaje", typeof(string));
+
+                result.Rows.Add(new System.Drawing.Bitmap(@"C:\Users\Alexander\Documents\Visual Studio 2015\Projects\ProcedureEasy\ProcedureEasy\imagenes\error.png"), resultado + "", sql, ex.Message);
+               // throw new Exception(ex.Message);
+            }
+               
+
+          
+            return result;
+        }
+
         /// <summary>
         /// Metodo que retorna una lista con los nombres de los esquemas existentes en la base de datos. 
         /// </summary>
-        /// <param name="conexion"></param>
         /// <returns>List</returns>
         public List<string> listaSchemas()
         {
@@ -125,55 +198,98 @@ namespace ProcedureEasy
         /// y el nombre de la base propietario de la rutina
         /// </summary>
         /// <returns>List </returns>
-        public List<Procedimientos> listaProcedures()
+       
+        /// <summary>
+        /// Metodo que devuelve el codigo de un procedimiento 
+        /// </summary>
+        /// <returns>List </returns>
+       public List<Procedimientos> listaProcedures()
         {
             List<Procedimientos> lsp = new List<Procedimientos>();
             Conexion conectar = new Conexion();
             try
             {
-                string sql = "SELECT SPECIFIC_NAME,ROUTINE_DEFINITION,ROUTINE_SCHEMA FROM information_schema.ROUTINES "
-                + " WHERE ROUTINE_SCHEMA= database()  "
-                + " AND ROUTINE_TYPE='PROCEDURE'; ";
-                MySqlCommand cmd = new MySqlCommand(sql, conectar.Connection);
-                conectar.Connection.Open();
-                MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
+                
+                  
+                    string sql = "SELECT SPECIFIC_NAME,ROUTINE_DEFINITION,ROUTINE_SCHEMA FROM information_schema.ROUTINES "
+               + " WHERE ROUTINE_SCHEMA= database()  "
+               + " AND ROUTINE_TYPE='PROCEDURE'; ";
+
+                    
+                    MySqlCommand cmdCodigo = new MySqlCommand(sql, conectar.Connection);
+                    conectar.Connection.Open();
+                    MySqlDataReader read = cmdCodigo.ExecuteReader();
+                    if (read.HasRows)
                     {
+                        while (read.Read())
+                        {
                         Procedimientos sp = new Procedimientos();
-                        sp.NameProcedure = reader[0].ToString();
-                        sp.Definition = reader[1].ToString();
-                        sp.NameBase = reader[2].ToString();
+                        sp.NameProcedure = read[0].ToString();
+                        sp.Definition = read[1].ToString();
+                        sp.NameBase = read[2].ToString();
                         lsp.Add(sp);
+                        }
                     }
-
-                }
-                reader.Close();
+                    read.Close();
+               
+               
+                
                 conectar.Connection.Close();
-
             }
             catch (Exception ex)
             {
 
                 new Exception(ex.Message);
-            }
+            }          
+
             return lsp;
+
         }
+        /// <summary>
+        /// Metodo que retorna el codigo completo de un procedimiento almacenano 
+        /// </summary>
+        /// <param name="nombre_procedure"> Variable string con el nombre del procedimeitno <example> "SpInsert_Clientes"</example></param>
+        /// <returns>string </returns>
+        public string codigoProcedimiento(string nombre_procedure)
+        {
+            string resultado = null;
+            try
+            {
+                Conexion conectar = new Conexion();
+                string sql = " show create procedure "+ nombre_procedure;
+                MySqlCommand cmd = new MySqlCommand(sql, conectar.Connection);
+                conectar.Connection.Open();
+                MySqlDataReader red = cmd.ExecuteReader();
+                if (red.HasRows)
+                {
+                    while (red.Read())
+                    {
+                        resultado = red.GetValue(2).ToString();
+                    }
+                }
+                red.Close();
+                conectar.Connection.Close();
+            }
+            catch (Exception )
+            {
+
+                throw;
+            }
+            return resultado;
+        } 
         /// <summary>
         /// Metodo que retorna una lista de tablas pertenecientes a un esquema o base de datos
         /// </summary>
         /// <returns>List</returns>
-        public List<string> listaTablas()
+        public List<Tabla> listaTablas()
         {
-            
-            List<string> ltables = new List<string>();
+
+            List < Tabla> ltables = new List<Tabla>();
             Conexion conectar = new Conexion();
             try
             {
-                string sql = " select TABLE_NAME as Tabla from information_schema.TABLES "
-                + " WHERE TABLE_SCHEMA = database()  "
-                + " AND TABLE_TYPE='BASE TABLE'; ";
+                string sql = " select TABLE_NAME,TABLE_TYPE from information_schema.TABLES "
+                + " WHERE TABLE_SCHEMA = database()  ";
                 MySqlCommand cmd = new MySqlCommand(sql, conectar.Connection);
                 conectar.Connection.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -181,7 +297,10 @@ namespace ProcedureEasy
                 {
                     while (reader.Read())
                     {
-                         ltables.Add(reader[0].ToString());
+                        Tabla table = new Tabla();
+                        table.NombreTabla = reader[0].ToString();
+                        table.TipoTabla = reader[1].ToString();
+                         ltables.Add(table);
                     }
 
                 }
@@ -203,30 +322,36 @@ namespace ProcedureEasy
         /// </summary>
         /// <param name="nombreTabla"> string con el nombre de la tabla</param>
         /// <returns>List de clase Tabla</returns>
-        public List<Tabla> estructuraTabla(string nombreTabla)
+        public List<EstructuraTabla> estructuraTabla(string nombreTabla)
         {
-            List<Tabla> estructura = new List<Tabla>();
+            List<EstructuraTabla> estructura = new List<EstructuraTabla>();
             Conexion conectar = new Conexion();
             try
             {
-                string sql = " describe " + nombreTabla;
+                string sql = "select cl.column_name,cl.column_type,cl.is_nullable, cl.column_key, cl.column_default,cl.extra"+
+" from information_schema.columns cl "+
+" where cl.table_schema = database() " +
+" and cl.table_name =  '" +nombreTabla+
+"' order by cl.table_name,ordinal_position; ";
 
                 conectar.Connection.Open();
                 MySqlCommand cmd = new MySqlCommand(sql, conectar.Connection);
                 MySqlDataReader red = cmd.ExecuteReader();
                 while (red.Read())
                 {
-                    Tabla tab = new Tabla();
+                    EstructuraTabla tab = new EstructuraTabla();
                     tab.Field = red[0].ToString();
                     tab.Type = red[1].ToString();
                     tab.Null = red[2].ToString();
                     tab.Key = red[3].ToString();
                     tab.Default = red[4].ToString();
                     tab.Extra = red[5].ToString();
+                    //tab.Tblview = red[6].ToString();
                     estructura.Add(tab);
                 }
-                conectar.Connection.Close();
                 red.Close();
+                conectar.Connection.Close();
+               
             }
             catch (Exception e)
             {
@@ -242,7 +367,7 @@ namespace ProcedureEasy
         public List<Funciones> cargarFunciones()
         {
             JavaScriptSerializer ser = new JavaScriptSerializer();
-            string outputJSON = File.ReadAllText(@"C:\Users\Alexander\Documents\Visual Studio 2015\Projects\ProcedureEasy\ProcedureEasy\Funciones.json");
+            string outputJSON = File.ReadAllText(@"C:\Users\Alexander\Documents\Visual Studio 2015\Projects\ProcedureEasy\ProcedureEasy\FuncionesMySQL.json");
             List<Funciones> fun = (List<Funciones>)ser.Deserialize(outputJSON, typeof(List<Funciones>));
             return fun;
         }
@@ -334,10 +459,16 @@ namespace ProcedureEasy
         /// </summary>
         Select,
         /// <summary>
-        ///  Crea un procedimiento para buscar de 
-        /// datos automáticamente con todos los datos. 
+        ///  Crea la estrunctura de un procedimiento almacenado 
+        ///  simple, capaz de executar una solo sentencia SQL.
         /// </summary>
-        Find
+        Simple,
+        /// <summary>
+        /// Crea la estructura de un procedimiento almacenado complejo,
+        /// que sirve para ejecutar varias sentencias sql
+        /// </summary>
+        Complejo
+
     };
 
 
