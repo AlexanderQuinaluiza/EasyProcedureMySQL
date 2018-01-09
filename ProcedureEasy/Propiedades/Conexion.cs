@@ -10,6 +10,8 @@ namespace ProcedureEasy.Propiedades
     class Conexion
     { // variables estaticas que el usuario de la API debe enviar.
        static private MySqlConnection _Connection;
+
+
        static private string _nombreTabla;
            
 
