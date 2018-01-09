@@ -1,0 +1,322 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProcedureEasy</name>
+    </assembly>
+    <members>
+        <member name="P:ProcedureEasy.Propiedades.Conexion.NombreTabla">
+            <summary>
+            * set o get el nombre de la tabla de cual cual se quiere realizar los procedimientos
+            <example> tabla clientes</example>
+            </summary>
+        </member>
+        <member name="P:ProcedureEasy.Propiedades.Conexion.Connection">
+            <summary>
+            * set o get la conexión establecida por el usuario de la API.
+            <example> MySqlConnection conection</example>
+            </summary>
+        </member>
+        <member name="T:ProcedureEasy.Propiedades.Procedimientos">
+            <summary>
+            clase que contiene las propiedades necesarias de un procedimiento almacenado en MySQL
+            </summary>
+        </member>
+        <member name="T:ProcedureEasy.Propiedades.Relaciones">
+            <summary>
+            Clase que contiene las propiedades de las relaciones entre tablas 
+            de una base de datos 
+            </summary>
+        </member>
+        <member name="P:ProcedureEasy.Propiedades.Relaciones.Column_name">
+            <summary>
+            set y get del nombre de la comlumna relacionada
+            </summary>
+        </member>
+        <member name="P:ProcedureEasy.Propiedades.Relaciones.Const_name">
+            <summary>
+            set y get del nombre de la relación existente en la base de datos 
+            </summary>
+        </member>
+        <member name="P:ProcedureEasy.Propiedades.Relaciones.Refe_table">
+            <summary>
+            set y get de la tabla referenciada en la relación 
+            </summary>
+        </member>
+        <member name="P:ProcedureEasy.Propiedades.Relaciones.Ref_column">
+            <summary>
+            set y get de la columna refrenciada de la tabla referenciada
+            </summary>
+        </member>
+        <member name="P:ProcedureEasy.Propiedades.Relaciones.Table_name">
+            <summary>
+            set y get de la tabla a la que se hace referecia 
+            </summary>
+        </member>
+        <member name="T:ProcedureEasy.Propiedades.EstructuraTabla">
+            <summary>
+            Clase que contiene las propiedades de los campos necesarios para la manipulacion y construcción 
+            de procedimientos alamcenados automaticamente.
+            </summary>
+        </member>
+        <member name="P:ProcedureEasy.Propiedades.EstructuraTabla.Field">
+            <summary>
+            * set o get el nombre del campo de la tabla.
+            Ejemplo: <example>id,nombre,apellido ...</example>
+            </summary>
+        </member>
+        <member name="P:ProcedureEasy.Propiedades.EstructuraTabla.Type">
+            <summary>
+            * set o get el tipo de dato y su longitud.
+            Ejemplo: <example> varchar(100)</example>
+            </summary>
+        </member>
+        <member name="P:ProcedureEasy.Propiedades.EstructuraTabla.Null">
+            <summary>
+            * set o get si el campo de la tabla acepta valores NULL.
+            Ejemplo: <example> NO o SI</example>
+            </summary>
+        </member>
+        <member name="P:ProcedureEasy.Propiedades.EstructuraTabla.Key">
+            <summary>
+            * set o get si el campo de la tabla es clave primary, unica, indice, clave forenea o mas
+            Ejemplo: <example> PRI,MUL...</example>
+            </summary>
+        </member>
+        <member name="P:ProcedureEasy.Propiedades.EstructuraTabla.Default">
+            <summary>
+            * set o get si el  campo de la tabla tiene valores o expresiones por defecto.
+            Ejemplo: <example> 0,'administrador'...</example>
+            </summary>
+        </member>
+        <member name="P:ProcedureEasy.Propiedades.EstructuraTabla.Extra">
+            <summary>
+            * set o get si el campo posee opciones extras.
+            Ejemplo: <example> Current_timestamp, auto_increment...</example>
+            </summary>
+        </member>
+        <member name="T:ProcedureEasy.Propiedades.Tabla">
+            <summary>
+            clase que contiene las propiedades de una tabla 
+            </summary>
+        </member>
+        <member name="P:ProcedureEasy.Propiedades.Tabla.NombreTabla">
+            <summary>
+            set y get el nombre de las tablas que pertenecen a la base de datos conectada
+            </summary>
+        </member>
+        <member name="P:ProcedureEasy.Propiedades.Tabla.TipoTabla">
+            <summary>
+            set y get el tipo de tabla, ya sea BASE_TABLE, VIEW
+            </summary>
+        </member>
+        <member name="T:ProcedureEasy.CreateProcedure">
+            <summary>
+            Clase u objeto que facilita la generación de Procedimientos Almacenados
+            automaticos para MySQL.
+            </summary>
+        </member>
+        <member name="M:ProcedureEasy.CreateProcedure.#ctor">
+            <summary>
+            Constructor de la clase, sin parametros 
+            </summary>
+        </member>
+        <member name="M:ProcedureEasy.CreateProcedure.#ctor(MySql.Data.MySqlClient.MySqlConnection)">
+            <summary>
+            Constructor que establece la conexión con la base da datos para poder tarbajar con los siguientes tablas 
+            </summary>
+            <param name="conexion">MySqlConnection conexion</param>
+        </member>
+        <member name="M:ProcedureEasy.CreateProcedure.#ctor(MySql.Data.MySqlClient.MySqlConnection,System.String)">
+            <summary>
+            Constructor con parametros que inicializa la conexión y el nombre de la tabla.
+            </summary>
+            <param name="conexion"> Conexión tipo MySqlConnection.</param>
+            <param name="nombreTabla"> Nombre de la tabla. <example>"clientes"</example></param>
+        </member>
+        <member name="M:ProcedureEasy.CreateProcedure.createProcedimiento(ProcedureEasy.Tipo,System.String)">
+            <summary>
+            Metodo que genera y inserta en la base de datos el procedimiento almacenado dependiendo
+            del Tipo que elija.
+            </summary>
+            <param name="tipoProcedimiento"> Número al que representa la numeración. <example>Tipo.Insert</example></param>
+            <param name="nombreTabla"> Nombre de la tabla en la que se quiere ejecutar la operación. <example>"clientes"</example></param>
+            <returns>string, codigo del procedimiento almacenado. </returns>
+        </member>
+        <member name="M:ProcedureEasy.CreateProcedure.executarSql(System.String)">
+            <summary>
+            Metodo que ejecuta el codigo generado  y lo ingresa en la base de datos MySQL.
+            </summary>
+            <param name="sql"> string con el codigo listo para ejecutarse.</param>
+            <returns> DataTable, datos que el MySQL retorne.
+            En el caso de creación de procedimientos almacenados el comando retorna el número cero(0)
+            si la execución fue la correcta.</returns>
+        </member>
+        <member name="M:ProcedureEasy.CreateProcedure.listaSchemas">
+            <summary>
+            Metodo que retorna una lista con los nombres de los esquemas existentes en la base de datos. 
+            </summary>
+            <returns>List</returns>
+        </member>
+        <member name="M:ProcedureEasy.CreateProcedure.listaProcedures">
+            <summary>
+            Metodo que rotorna una lista de tipo clase Procedimientos con los valores como el nombre,el codigo 
+            y el nombre de la base propietario de la rutina
+            </summary>
+            <returns>List </returns>
+            <summary>
+            Metodo que devuelve el codigo de un procedimiento 
+            </summary>
+            <returns>List </returns>
+        </member>
+        <member name="M:ProcedureEasy.CreateProcedure.codigoProcedimiento(System.String)">
+            <summary>
+            Metodo que retorna el codigo completo de un procedimiento almacenano 
+            </summary>
+            <param name="nombre_procedure"> Variable string con el nombre del procedimeitno <example> "SpInsert_Clientes"</example></param>
+            <returns>string </returns>
+        </member>
+        <member name="M:ProcedureEasy.CreateProcedure.listaTablas">
+            <summary>
+            Metodo que retorna una lista de tablas pertenecientes a un esquema o base de datos
+            </summary>
+            <returns>List</returns>
+        </member>
+        <member name="M:ProcedureEasy.CreateProcedure.estructuraTabla(System.String)">
+            <summary>
+            Metodo que retorna una lista de clase tabla, con las propiedades necesarias
+            </summary>
+            <param name="nombreTabla"> string con el nombre de la tabla</param>
+            <returns>List de clase Tabla</returns>
+        </member>
+        <member name="M:ProcedureEasy.CreateProcedure.cargarFunciones">
+            <summary>
+            Metodo para cargar todas las funciones que soporta Mysql
+            </summary>
+            <returns>List de clase Funciones</returns>
+        </member>
+        <member name="M:ProcedureEasy.CreateProcedure.listaRelaciones">
+            <summary>
+            Metodo que retorna una lista con el nombre, tablas y columnas relacionas entre si.
+            </summary>
+            <returns>List de tipo "Relaciones" <example> const_name,estudiantes,cedula,materia,cedula_p</example>
+            Entonces se identifica la correspondecia de uno a varios en el orden establecido</returns>
+        </member>
+        <member name="T:ProcedureEasy.Tipo">
+             <summary>
+             Tipo de procedimiento a generar. 
+            <example> procedimieto.Tipo.Insert</example>
+             </summary>
+        </member>
+        <member name="F:ProcedureEasy.Tipo.Insert">
+            <summary>
+            Crea un procedimiento para la inserción de 
+            datos automáticamente con todos los campos excepto los campos Auto_increment. 
+            </summary>
+        </member>
+        <member name="F:ProcedureEasy.Tipo.Update">
+            <summary>
+            Crea un procedimiento para la actualizacíon de 
+            datos automáticamente con todos los campos excepto los campos Auto_increment. 
+            </summary>
+        </member>
+        <member name="F:ProcedureEasy.Tipo.Delete">
+            <summary>
+            Crea un procedimiento para el borrado de 
+            datos automáticamente con todos los campos excepto los campos Auto_increment. 
+            </summary>
+        </member>
+        <member name="F:ProcedureEasy.Tipo.Select">
+            <summary>
+             Crea un procedimiento para la consulta de 
+            datos automáticamente con todos los campos. 
+            </summary>
+        </member>
+        <member name="F:ProcedureEasy.Tipo.Simple">
+            <summary>
+             Crea la estrunctura de un procedimiento almacenado 
+             simple, capaz de executar una solo sentencia SQL.
+            </summary>
+        </member>
+        <member name="F:ProcedureEasy.Tipo.Complejo">
+            <summary>
+            Crea la estructura de un procedimiento almacenado complejo,
+            que sirve para ejecutar varias sentencias sql
+            </summary>
+        </member>
+        <member name="T:ProcedureEasy.Operaciones.GenerarCodigoProcedure">
+            <summary>
+            Esta clase genera el codigo del procedimiento almacenado despues del mapeo de datos.
+            </summary>
+        </member>
+        <member name="M:ProcedureEasy.Operaciones.GenerarCodigoProcedure.CodigoUpdateProcedure">
+            <summary>
+            Método para generar el código de un procedimiento de actualización.
+            </summary>
+            <returns>string, codigo del procedimineto de actualización.
+            <example> create procedure SpUpdate_[nombre_Tabla] ([proc_parameter[,...]])
+            [Setencia update ...] </example></returns>
+        </member>
+        <member name="M:ProcedureEasy.Operaciones.GenerarCodigoProcedure.CodigoInsertProcedure">
+             <summary>
+             Metodo que retorna el codigo de un procedimiento de inserción
+             </summary>
+            <returns>string, codigo del procedimineto de actualización.
+             <example> create procedure SpInsert_[nombre_Tabla] ([proc_parameter[,...]])
+             [Setencia insert ...] </example></returns>
+        </member>
+        <member name="M:ProcedureEasy.Operaciones.GenerarCodigoProcedure.CodigoDeleteProcedure">
+            <summary>
+            Metodo que retorna el codigo de un procedimiento para el borrado de datos.
+            </summary>
+            <returns>string, codigo del procedimineto de borrado.
+            <example> create procedure SpDelete_[nombre_Tabla] ([proc_parameter_primary_key[,...]])
+            [Setencia delete ...] </example></returns>
+        </member>
+        <member name="M:ProcedureEasy.Operaciones.GenerarCodigoProcedure.CodigoSelectProcedure">
+            <summary>
+            Metodo que retorna el codigo de un procedimiento para la consulta de datos.
+            </summary>
+            <returns> string, codigo del procedimiento para la consulta</returns>
+        </member>
+        <member name="M:ProcedureEasy.Operaciones.GenerarCodigoProcedure.CodigoFindProcedure">
+            <summary>
+            Metodo que retorna el codigo de un procedimiento para la busqueda de un registro especifico
+            de la base de datos.
+            </summary>
+            <returns>string, codigo del procedimineto de busqueda.
+            <example> create procedure SpFind_[nombre_Tabla] ([proc_parameter_primary_key[,...]])
+            [Setencia select ...] </example></returns>
+        </member>
+        <member name="M:ProcedureEasy.Operaciones.GenerarCodigoProcedure.CodigoSimpleProcedure">
+            <summary>
+            Metodo que genera un codigo simple de ejemplo de un procedimiento para MySQL.
+            </summary>
+            <returns>(string) Codigo de un Procedure simple.</returns>
+        </member>
+        <member name="M:ProcedureEasy.Operaciones.GenerarCodigoProcedure.CodigoComplejoProcedure">
+            <summary>
+            Metodo que genera el codigo de un procedimiento almacenado complejo en MySQL.
+            </summary>
+            <returns>(string) Codigo del procedimiento almacenado </returns>
+        </member>
+        <member name="T:ProcedureEasy.Operaciones.Operaciones">
+            <summary>
+            En esta clase o objeto contiene metodos importantes para la genereación de codigo
+            para la creacion de procedimientos y triggers en el caso de validación de datos.
+            </summary>
+        </member>
+        <member name="M:ProcedureEasy.Operaciones.Operaciones.estructuraTabla">
+            <summary>
+            Metodo que mapa la tabla y obtiene paramatros de la Clase Tabla
+            </summary>
+            <returns> List de clase Tabla</returns>
+        </member>
+        <member name="M:ProcedureEasy.Operaciones.Operaciones.existeProcedimiento(System.String)">
+            <summary>
+            Metodo que valida si existe o no el procedimiento antes de crearlo
+            </summary>
+            <param name="nombreProcedure"> Nombre del procedimiento</param>
+            <returns>int, número de filas</returns>
+        </member>
+    </members>
+</doc>
