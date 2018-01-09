@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
-namespace ProcedureEasy
+namespace ProcedureEasy.Propiedades
 {
     class Conexion
     { // variables estaticas que el usuario de la API debe enviar.

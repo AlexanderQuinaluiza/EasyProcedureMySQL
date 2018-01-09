@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web.Script.Serialization;
 
-namespace ProcedureEasy
+namespace ProcedureEasy.Operaciones
 {
     /// <summary>
     /// En esta clase o objeto contiene metodos importantes para la genereación de codigo

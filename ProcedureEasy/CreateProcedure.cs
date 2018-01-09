@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Web.Script.Serialization;
 using System.IO;
+using ProcedureEasy.Operaciones;
 using ProcedureEasy.Propiedades;
 using System.Data;
 using System.Drawing;

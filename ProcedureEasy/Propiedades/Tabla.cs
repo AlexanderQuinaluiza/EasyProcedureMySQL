@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProcedureEasy
+namespace ProcedureEasy.Propiedades
 {
     /// <summary>
     /// clase que contiene las propiedades de una tabla 

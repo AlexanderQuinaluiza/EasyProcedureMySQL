@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProcedureEasy
+namespace ProcedureEasy.Propiedades
 {/// <summary>
 /// Clase que contiene las propiedades de los campos necesarios para la manipulacion y construcción 
 /// de procedimientos alamcenados automaticamente.

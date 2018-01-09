@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProcedureEasy
+namespace ProcedureEasy.Propiedades
 {/// <summary>
 /// clase que contiene las propiedades necesarias de un procedimiento almacenado en MySQL
 /// </summary>

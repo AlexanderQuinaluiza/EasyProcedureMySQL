@@ -1,11 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using ProcedureEasy.Propiedades;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProcedureEasy
+namespace ProcedureEasy.Operaciones
 {/// <summary>
 /// Esta clase genera el codigo del procedimiento almacenado despues del mapeo de datos.
 /// </summary>
